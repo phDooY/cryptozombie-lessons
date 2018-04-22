@@ -1,26 +1,26 @@
 {
     "1": {
-        "pageTitle": "クリプトゾンビ {{ .ZombieName }}を作ったよ。これオススメ!",
-        "ogDesc": "CryptoZombiesのレッスン1が終わったよ。イーサリアムでゲームを開発する基礎が学べたからオススメ。最初のゾンビを作ったよ！"
+        "pageTitle": "Check out my CryptoZombie {{ .ZombieName }}!",
+        "ogDesc": "I just completed CryptoZombies Lesson 1 and learned the basics of coding a game on Ethereum. Take a look at the first zombie in my army!"
     },
     "2": {
-        "pageTitle": "育てているクリプトゾンビの{{ .ZombieName }} がクリプトキティを捕食してレベルアップしたよ！",
-        "ogDesc": "CryptoZombiesのレッスン2が終わったよ。ゾンビ化させたクリプトキティをゾンビ軍団に加えたよ。面白いからオススメ！ "
+        "pageTitle": "My CryptoZombie {{ .ZombieName }} just ate a CryptoKitty and leveled up!",
+        "ogDesc": "I just completed CryptoZombies Lesson 2, and added a reanimated CryptoKitty to my zombie army. Come take a look!"
     },
     "3": {
-        "pageTitle": "クリプトゾンビ軍団が成長したよ",
-        "ogDesc": "CryptoZombiesのレッスン3が終わったよ！作ったゾンビ軍団が成長してきたよ...:"
+        "pageTitle": "Check out my CryptoZombie Army!",
+        "ogDesc": "I just completed CryptoZombies Lesson 3! My zombie army is growing..."
     },
     "4": {
-        "pageTitle": "クリプトゾンビが敵のIOTAゾンビをやっつけたよ!",
-        "ogDesc": "CryptoZombiesのレッスン4が終わったよ！敵のIOTAゾンビをやっつけたよ!"
+        "pageTitle": "My CryptoZombie defeated the evil IOTA zombie!",
+        "ogDesc": "I just completed CryptoZombies Lesson 4, and defeated the evil IOTA zombie! Come relive the battle..."
     },
     "5": {
-        "pageTitle": "クリプトゾンビ軍団が大きくなってきたよ!",
-        "ogDesc": "CryptoZombiesのレッスン5が終わったよ！なんとレベル10のH4XF13LD MORRIS💯💯😎💯💯ゾンビをゲットしたよ!"
+        "pageTitle": "My CryptoZombie Army Has Grown!",
+        "ogDesc": "I just completed CryptoZombies Lesson 5, and got a level 10 H4XF13LD MORRIS 💯💯😎💯💯 zombie OMG!"
     },
     "6": {
-        "pageTitle": "レベル3.0のクリプトゾンビ'The Phantom of Web3'をチェックしてみて!",
-        "ogDesc": "CryptoZombiesのレッスン6が終わったよ！DAppを作れるように、Web3.jsやMetaMask、あとInfuraの使い方を学んだよ!"
+        "pageTitle": "Check out 'The Phantom of Web3', my Level 3.0 CryptoZombie!",
+        "ogDesc": "I just completed CryptoZombies Lesson 6, and learned how to use Web3.js, MetaMask, and Infura to build my own DApp!"
     }
 }
