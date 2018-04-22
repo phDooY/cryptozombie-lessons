@@ -1,22 +1,20 @@
 ---
-title: Lesson 1 Complete!
-actions:
-  - checkAnswer
-  - hints
+title: 第一课结束!
+actions: ['答案', '提示']
 material:
   lessonComplete:
     answer: 1
 ---
-Congratulations! You have completed lesson 1, and you have created the first zombie in your army.
 
-# Next Steps
+恭喜! 你完成了第一课，为你的部队创造了第一个僵尸。
 
-This is just the beginning. We will be releasing a new CryptoZombies lesson each week, to build out the game further and further and keep growing your zombie army.
+# 后面的步骤
 
-### 1. Sign in to save your progress
+这只是开始，我们每周都会发布新的 CryptoZombies 课程, 进一步开发我们的游戏，不断壮大我们的僵尸部队。
+### 1. 登录能保存你的学习进程
 
-***Sign in*** to save your progress by clicking the "Save Progress" link at the top of the page. We'll let you know as soon as we add a new lesson.
+**_Sign in_** 保存学习进程点击页面顶部的 "Save Progress"。 一旦我们发布新的课程，我们会立即通知你。
 
-### 2. Share your zombie with your friends
+### 2. 和你的朋友分享你的僵尸吧！
 
-***Share*** your zombie on Twitter, blah blah, etc. (Need to insert images / links)
+**_Share_** 在微博、Twitter等平台分享(需要插入图像／链接)

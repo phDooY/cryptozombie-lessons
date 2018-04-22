@@ -1,53 +1,56 @@
 ---
-title: "Contracts"
-actions:
-  - checkAnswer
-  - hints
+title: "合约"
+actions: ['答案', '提示']
 material:
   editor:
     language: sol
     startingCode: |
-      pragma solidity //1. Enter solidity version here
-      
-      //2. Create contract here
+      pragma solidity //1. 这里写版本指令
+
+      //2. 这里建立智能合约
     answer: >
       pragma solidity ^0.4.19;
-      
+
+
       contract ZombieFactory {
+
       }
 ---
-Starting with the absolute basics:
 
-Solidity's code is encapsulated in **contracts**. A `contract` is the fundamental building block of Ethereum applications — all variables and functions belong to a contract, and this will be the starting point of all your projects.
+从最基本的开始入手:
 
-An empty contract named `HelloWorld` would look like this:
+Solidity 的代码都包裹在**合约**里面. 一份`合约`就是以太应币应用的基本模块， 所有的变量和函数都属于一份合约, 它是你所有应用的起点.
 
-    contract HelloWorld {
-    
-    }
-    
+一份名为 `HelloWorld` 的空合约如下:
 
-## Version Pragma
+```
+contract HelloWorld {
 
-All solidity source code should start with a "version pragma" — a declaration of the version of the Solidity compiler this code should use. This is to prevent issues with future compiler versions potentially introducing changes that would break your code.
+}
+```
 
-It looks like this: `pragma solidity ^0.4.19;` (for the latest solidity version at the time of this writing, 0.4.19).
+## 版本指令
 
-Putting it together, here is a bare-bones starting contract — the first thing you'll write every time you start a new project:
+所有的 Solidity 源码都必须冠以 "version pragma" — 标明 Solidity 编译器的版本. 以避免将来新的编译器可能破坏你的代码。
 
-    pragma solidity ^0.4.19;
-    
-    contract HelloWorld {
-    
-    }
-    
+例如: `pragma solidity ^0.4.19;` (当前 Solidity 的最新版本是 0.4.19).
 
-# Put it to the test
+综上所述， 下面就是一个最基本的合约 — 每次建立一个新的项目时的第一段代码:
 
-To start creating our Zombie army, let's create a base contract called `ZombieFactory`.
+```
+pragma solidity ^0.4.19;
 
-1. In the box to the right, make it so our contract uses solidity version `0.4.19`.
+contract HelloWorld {
 
-2. Create an empty contract called `ZombieFactory`.
+}
+```
 
-When you're finished, click "check answer" below. If you get stuck, you can click "hint".
+# 实战演习
+
+为了建立我们的僵尸部队， 让我们先建立一个基础合约，称为 `ZombieFactory`。
+
+1. 在右边的输入框里输入 `0.4.19`，我们的合约基于这个版本的编译器。
+
+2. 建立一个空合约 `ZombieFactory`。
+
+一切完毕，点击下面 "答案" . 如果没效果，点击 "提示"。
