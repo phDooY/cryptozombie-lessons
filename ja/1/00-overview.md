@@ -1,11 +1,10 @@
 ---
-title: ゾンビファクトリーの作成
-header: よく来たな、人間よ!
+title: Making the Zombie Factory
+header: Welcome, human!
 roadmap: roadmap.jpg
 ---
+So you think you have what it takes to become a **CryptoZombie**, huh?
 
-さて、それじゃあ**CryptoZombie**を始める準備はできたってことだな？
+This course will teach you how to **build a game on Ethereum**.
 
-このコースでは**イーサリアム上でゲームを作成する方法**を君たちに教える。
-
-Solidityの初心者でもわかるように教えていくつもりだが、別の言語（例：JavaScript）である程度経験があることを前提に進めるから、その辺りはよろしく頼むぞ。
+It's designed for beginners to Solidity, but it assumes you have some experience programming in another language (e.g. Javascript).
