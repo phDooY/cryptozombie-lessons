@@ -1,16 +1,14 @@
 ---
-title: Solidityの高度なコンセプト
-header: "レッスン 3: Solidityの高度なコンセプト"
+title: Advanced Solidity Concepts
+header: "Lesson 3: Advanced Solidity Concepts"
 roadmap: roadmap3.png
 ---
+Grr... I just can't slow you down, can I? Your Solidity skills are formidable, human...
 
-ウーム...人間よ、お前はSolidityに対する半端ないポテンシャルを秘めているようだ...
+Now that you've got some experience coding Solidity under your belt, we're going to dive into some of the more technical aspects of Ethereum development.
 
-さて、おぬしはすでにSolidityのコードが自分のものになりつつあるだろう。そこで、イーサリアムの開発におけるさらに深い技術を教えていくことにする。
+This lesson will be a bit less flashy (sorry, no plot twists!). But you’ll learn some really important concepts that will take you closer to building real DApps — things like **contract ownership, gas costs, code optimization, and security**.
 
-このレッスン3はちょっと地味だ（重要なことは地味に見えるものだ！）。だが、ここでしっかりと学べば、**コントラクトのオーナーシップ、ガス（燃料）のコスト、コードの最適化、 セキュリティ**といったDAppを開発するのに実際に必要な技術を身につけることができるだろう。
+You've been warned — no kitties and rainbows in Lesson 3!
 
-ちゃんとお主に伝えたからな。レッスン3は非常に地道な作業になるぞ！
-
-しかし教えていく内容はかなり濃い内容だ。レッスン2をやっておかないとついてこれないからしっかりと復習しておけよ。
-
+But a lot of densely-packed Solidity knowledge. We strongly recommended that you complete Lesson 2 before starting this one.
