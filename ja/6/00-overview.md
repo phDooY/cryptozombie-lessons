@@ -1,19 +1,18 @@
 ---
-title: アプリのフロントエンドとWeb3.js
-header: "レッスン６: アプリのフロントエンドとWeb3.js"
+title: App Front-ends & Web3.js
+header: "Lesson 6: App Front-ends & Web3.js"
 roadmap: roadmap6.png
 ---
+Huh, you've made it this far?!
 
-なんと...ここまでやってこれたのか!?
+You're no ordinary CryptoZombie...
 
-お主は平凡なクリプトゾンビではないな...
+By completing Lesson 5, you've demonstrated that you have a pretty firm grasp of Solidity.
 
-レッスン５を修了して、Solidityをしっかりと理解したと証明できただろう。
+But no DApp is complete without a way for its users to interact with it...
 
-だがユーザーがDAppとやり取りする方法なくしては、どんなDAppも完成しないのだ...
+In this lesson, we're going to look at how to interact with your smart contract and build a basic front-end for your DApp using a library called **Web3.js**.
 
-このレッスンでは、スマートコントラクトとの対話方法、そして **Web3.js** というライブラリを使ってお主のDAppのベーシックなフロントエンドを作る方法を見ていこう。
+Note that app front-ends are written in **JavaScript**, not Solidity. But since the focus of this course is on Ethereum / Solidity, we're assuming you are already comfortable building websites with HTML, JavaScript (including ES6 <a href="https://developers.google.com/web/fundamentals/primers/promises" target=_blank>promises</a>), and JQuery, and will not be spending time covering the basics of those languages.
 
-アプリのフロントエンドはSolidityではなく  **JavaScript** で書かれていることに注意するのだ。このコースはEthereumとSolidityにフォーカスしているが、お主がすでにHTMLとJavaScript(ES6 <a href="https://developers.google.com/web/fundamentals/primers/promises" target=_blank>promises</a>を含む)、そしてJQueryを使って十分にウェブサイトを作れて、これら言語の基本をやらなくてもいいことを想定している。
-
-もしまだHTMLとJavaScriptでウェブサイトを楽に作れなければ、このレッスンを始める前にどこかで別の基本チュートリアルをやっておこう。
+If you are not already comfortable building websites with HTML / Javascript, you should complete a basic tutorial elsewhere before starting this lesson.
