@@ -1,6 +1,8 @@
 ---
-title: レッスン 2 の概要
-actions: ['答え合わせ', 'ヒント']
+title: Lesson 2 Overview
+actions:
+  - checkAnswer
+  - hints
 material:
   saveZombie: false
   zombieBattle:
@@ -10,24 +12,24 @@ material:
     ignoreZombieCache: true
     answer: 1
 ---
+In lesson 1, we created a function that takes a name, uses it to generate a random zombie, and adds that zombie to our app's zombie database on the blockchain.
 
-レッスン 1では、名前を取得し、それを使ってランダムなゾンビを作り出し、それをブロックチェーン上のゾンビデータベースに追加するところまで教えたな。
+In lesson 2, we're going to make our app more game-like: We're going to make it multi-player, and we'll also be adding a more fun way to create zombies instead of just generating them randomly.
 
-レッスン 2では、このアプリをもっとゲームのようなものに変えるのだ：マルチプレーヤー対応にして、ゾンビの作り方もランダムではなくて、もっと面白い方法に変えていくぞ。
+How will we create new zombies? By having our zombies "feed" on other lifeforms!
 
-新しいゾンビをどうやって作るのかだって？　ゾンビに人間達を”喰わせる”のだっ！
+## Zombie Feeding
 
-## ゾンビの感染
+When a zombie feeds, it infects the host with a virus. The virus then turns the host into a new zombie that joins your army. The new zombie's DNA will be calculated from the previous zombie's DNA and the host's DNA.
 
-ゾンビが人間を噛むと、噛まれた人間にウィルスが感染するのだ。このウィルスは人間をゾンビに変えてお前の軍団に加えることができるものだ。新しいゾンビのDNAはゾンビのDNAと人間のDNAを計算した結果で生成されるのだ。
+And what do our zombies like to feed on most?
 
-ゾンビの好物はどんな人間か、だと・・・？
+To find that out... You'll have to complete lesson 2!
 
-なかなか面白いやつだ・・・　レッスン2を無事に終えることができたらわかるだろう！
+# Put it to the test
 
-# それではテストだ
-餌となる人間をゾンビに与える簡単なデモを右に用意してある。餌となる人間をクリックして、ゾンビに喰わせてやるとどうなるのかを見よ！
+There's a simple demo of feeding to the right. Click on a human to see what happens when your zombie feeds!
 
-新しいゾンビのDNAが元のゾンビと噛まれた人間のDNAで決定されることがわかるだろう。
+You can see that the new zombie's DNA is determined by your original zombie's DNA, as well as the host's DNA.
 
-次に進む準備ができたら、「次のチャプター」をクリックせよ。次のチャプターではこのアプリをマルチプレーヤーゲームにしていくぞ。
+When you're ready, click "Next chapter" to move on, and let's get started by making our game multi-player.
