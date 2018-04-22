@@ -1,8 +1,6 @@
 ---
-title: Wrapping It Up
-actions:
-  - checkAnswer
-  - hints
+title: まとめ
+actions: ['答え合わせ', 'ヒント']
 requireLogin: true
 material:
   saveZombie: false
@@ -12,60 +10,61 @@ material:
     hideSliders: true
     answer: 1
 ---
-Congratulations! You've successfully written your first Web3.js front-end that interacts with your smart contract.
 
-As a reward, you get your very own `The Phantom of Web3` zombie! Level 3.0 (for Web 3.0 
+よくやったな！スマートコントラクトとやり取りする、初めてのWeb3.jsを上手に書けたぞ！
 
-## Next Steps
+ご褒美として、お主だけの`The Phantom of Web3`ゾンビを与えよう！レベル3.0(Web3.0だからな😉)で、仕上げにキツネのマスク付きだ！右側でチェックするのだ。
 
-This lesson was intentionally basic. We wanted to show you the core logic you would need in order to interact with your smart contract, but didn't want to take up too much time in order to do a full implementation since the Web3.js portion of the code is quite repetitive, and we wouldn't be introducing any new concepts by making this lesson any longer.
+## 次のステップ
 
-So we've left this implementation bare-bones. Here's a checklist of ideas for things we would want to implement in order to make our front-end a full implementation for our zombie game, if you want to run with this and build it on your own:
+このレッスンは、あえて基本的なものとした。スマートコントラクトとやりとりするために必要なコアロジックお見せたかったが、コードのWeb3.js部分はかなり繰り返しが多く、完全に実装するのにあまりたくさんの時間を使いたくなかったし、これ以上レッスンをやって新しい概念を紹介するつもりはない。
 
-1. Implementing functions for `attack`, `changeName`, `changeDna`, and the ERC721 functions `transfer`, `ownerOf`, `balanceOf`, etc. The implementation of these functions would be identical to all the other `send` transactions we covered.
+だからこの実装は基礎的なものにした。以下は、お主が自分で構築を行う場合にフロントエンドにゾンビゲームを完全に実装させるための概念のチェックリストだ:
 
-2. Implementing an "admin page" where you can execute `setKittyContractAddress`, `setLevelUpFee`, and `withdraw`. Again, there's no special logic on the front-end here — these implementations would be identical to the functions we've already covered. You would just have to make sure you called them from the same Ethereum address that deployed the contract, since they have the `onlyOwner` modifier.
+1. `attack`および`changeName`、`changeDna`関数、そしてERC721の`transfer`、 `ownerOf`、`balanceOf`関数などの実装。これらの関数の実装は、我々がやった他の`send`トランザクションと同じだ。
 
-3. There are a few different views in the app we would want to implement:
-    
-    a. An individual zombie page, where you can view info about a specific zombie with a permalink to it. This page would render the zombie's appearance, show its name, its owner (with a link to the user's profile page), its win/loss count, its battle history, etc.
-    
-    b. A user page, where you could view a user's zombie army with a permalink. You would be able to click on an individual zombie to view its page, and also click on a zombie to attack it if you're logged into MetaMask and have an army.
-    
-    c. A homepage, which is a variation of the user page that shows the current user's zombie army. (This is the page we started implementing in index.html).
+2. `setKittyContractAddress`や`setLevelUpFee`、さらに`withdraw`を実行できる"管理者ページ"の実装。ここでもフロントエンドに特別なロジックはなく、これらの実装はすでに説明した関数と同じである。`onlyOwner`修飾子があるので、コントラクトをデプロイのと同じEthereumアドレスから呼び出したことを確認しなければならないだけだ。
 
-4. Some method in the UI that allows the user to feed on CryptoKitties. We could have a button by each zombie on the homepage that says "Feed Me", then a text box that prompted the user to enter a kitty's ID (or a URL to that kitty, e.g. <a href="https://www.cryptokitties.co/kitty/578397" target=_blank>https://www.cryptokitties.co/kitty/578397</a>). This would then trigger our function `feedOnKitty`.
+3. アプリに実装したい異なった閲覧ページがいくつかある:
 
-5. Some method in the UI for the user to attack another user's zombie.
-    
-    One way to implement this would be when the user was browsing another user's page, there could be a button that said "Attack This Zombie". When the user clicked it, it would pop up a modal that contains the current user's zombie army and prompt them "Which zombie would you like to attack with?"
-    
-    The user's homepage could also have a button by each of their zombies that said "Attack a Zombie". When they clicked it, it could pop up a modal with a search field where they could type in a zombie's ID to search for it. Or an option that said "Attack Random Zombie", which would search a random number for them.
-    
-    We would also want to grey out the user's zombies whose cooldown period had not yet passed, so the UI could indicate to the user that they can't yet attack with that zombie, and how long they will have to wait.
+  a. 特定のゾンビの情報を閲覧できる、パーマリンク付きの個別のゾンビのページ。このページはゾンビの外見を表し、その名前やオーナー(ユーザーのプロフィールページへのリンク付きで)、また勝敗のカウントやバトル履歴を表示する。
 
-6. The user's homepage would also have options by each zombie to change name, change DNA, and level up (for a fee). Options would be greyed out if the user wasn't yet high enough level.
+  b. パーマリンクでユーザーのゾンビ軍団を見ることができるユーザーページ。個別のゾンビをクリックしてページを表示し、またユーザーがMetaMaskにログイン済みでゾンビ軍隊を所有している場合は、そのクリックすることでそのゾンビを攻撃することになる。
 
-7. For new users, we should display a welcome message with a prompt to create the first zombie in their army, which calls `createRandomZombie()`.
+  c. 現在のユーザーのゾンビ軍団を表示するホームページ。ユーザーページのバリエーションとして（これは我々がindex.htmlで実装を開始したページだ）。
 
-8. We'd probably want to add an `Attack` event to our smart contract with the user's `address` as an `indexed` property, as discussed in the last chapter. This would allow us to build real-time notifications — we could show the user a popup alert when one of their zombies was attacked, so they could view the user/zombie who attacked them and retaliate.
+4. ユーザーがCryptoKittiesを捕食できるようにするUIのメソッド。ホームページ上の各ゾンビに「Feed Me」と表示するボタンをつけ、それをクリックするとユーザーにキティのIDを入力するよう要求するテキストボックスを作ればよい(またはキティのURL。例: <a href="https://www.cryptokitties.co/kitty/578397" target=_blank>https://www.cryptokitties.co/kitty/578397</a>)。これで`feedOnKitty`関数のトリガーを引く。
 
-9. We would probably also want to implement some sort of front-end caching layer so we aren't always slamming Infura with requests for the same data. (Our current implementation of `displayZombies` calls `getZombieDetails` for every single zombie every time we refresh the interface — but realistically we only need to call this for the new zombie that's been added to our army).
+5. 別のユーザーのゾンビを攻撃するための、ユーザー向けUIのメソッド。
 
-10. A real-time chat room so you could trash talk other players as you crush their zombie army? Yes plz.
+  この実装方法の1つとして、ユーザーが別のユーザーのページを閲覧している時に「このゾンビを攻撃する」ボタンがあるとよい。 ユーザーがボタンをクリックすると、そのユーザーのゾンビ軍団を含むモーダルがポップアップし「どのゾンビで攻撃しますか？」と促す。
 
-That's just a start — I'm sure we could come up with even more features — and already it's a massive list.
+  ユーザーのホームページには、各ゾンビに「ゾンビを攻撃する」というボタンをつけることもできる。ユーザーがそれをクリックするとモーダルの検索フィールドが表示されるので、ゾンビのIDを入力して検索する。または「ランダムなゾンビを攻撃する」というオプションで、ランダムな番号を検索する。
 
-Since there's a lot of front-end code that would go into creating a full interface like this (HTML, CSS, JavaScript and a framework like React or Vue.js), building out this entire front-end would probably be an entire course with 10 lessons in itself. So we'll leave the awesome implementation to you.
+  またクールダウン期間が経過していないユーザーのゾンビをグレーアウトして、そのゾンビではまだ攻撃ができないことと、どれくらい待たなければならないかをUIでユーザーに示すこともできる。
 
-> Note: Even though our smart contract is decentralized, this front-end for interacting with our DApp would be totally centralized on our web-server somewhere.
-> 
-> However, with the SDK we're building at <a href="https://medium.com/loom-network/loom-network-is-live-scalable-ethereum-dapps-coming-soon-to-a-dappchain-near-you-29d26da00880" target=_blank>Loom Network</a>, soon you'll be able to serve front-ends like this from their own DAppChain instead of a centralized web server. That way between Ethereum and the Loom DAppChain, your entire app would run 100% on the blockchain.
+6. ユーザーのホームページには、ゾンビごとに名前の変更、DNAの変更、レベルアップ（有料）のオプションもある。ユーザーがまだ十分なレベルでない場合、オプションはグレーアウトされる。
 
-## Conclusion
+7. 新規ユーザーの場合、最初のゾンビをゾンビ軍団の中に作成するよう促すメッセージを表示し、`createRandomZombie（）`関数を呼び出す必要がある。
 
-This concludes Lesson 6. You now have all the skills you need to code a smart contract and a front-end that allows users to interact with it!
+8. 最後のチャプターで説明したように、`Attack`イベントと一緒に、ユーザーの`address`を`indexed`プロパティとしてスマートコントラクトに追加したい。こうしてリアルタイム通知をの作成が可能になる　— ユーザーのゾンビ１体が攻撃されたときにポップアップアラートを表示できるので、彼らは攻撃したユーザーやゾンビを閲覧して反撃することができる。
 
-In the next lesson, we're going to be covering the final missing piece in this puzzle — deploying your smart contracts to Ethereum.
+9. 同一データへのリクエストでInfuraを常に使うわけではないから、ある種のフロントエンドキャッシュレイヤーを実装したい。（現在の`displayZombies`の実装は、インターフェースをリフレッシュするたびにゾンビごとに` getZombieDetails`を呼び出すが、実際は軍団に追加された新しいゾンビに対してこの関数を呼び出す必要がある）。
 
-Go ahead and click "Next Chapter" to claim your rewards!
+10. リアルタイムのチャットルーム。これでゾンビ軍団を倒す時に、所有者のプレーヤーたちに話しかけられるぞ？Yes、プリーズ！
+
+これはスタートに過ぎない。これはすでに大きなリストだが、我々はもっと多くの機能を思いつくはずだ。
+
+HTML、CSS、JavaScript、ReactやVue.jsのようなフレームワークなど、完全なインターフェイスを作成していくための多くのフロントエンドコードが存在するから、このフロントエンド全体を構築するのはおそらくそれだけで10レッスンのフルコースとなってしまう。だからかっこよく実装をするのはお主の宿題だ。
+
+> 注: スマートコントラクトは分散されていますが、DAppとやりとりするためのこのフロントエンドは、どこかのWebサーバーに完全に集約化されます。
+>
+> しかし <a href="https://medium.com/loom-network/loom-network-is-live-scalable-ethereum-dapps-coming-soon-to-a-dappchain-near-you-29d26da00880" target=_blank>Loom Network</a>で開発中のSDKを使って、もうすぐ集中化されたウェブサーバーの代わりに専用のDAppチェーンからこういったフロントエンドを提供することができるようになります。こうしてイーサリアムとLoom DAppチェーン間で、あなたのアプリは100%ブロックチェーン上で動くことになります。
+
+## まとめ
+
+これでレッスン６は終了だ。これでスマートコントラクトと、ユーザーがそれとやり取りできるフロントエンドをコーディングするのに必要な全スキルが揃ったぞ！
+
+次のレッスンでは、パズルの最後のピース ー イーサリアムへのスマートコントラクトのデプロイをやっていくからな。
+
+「次のチャプター」をクリックして、ご褒美を申請しよう！

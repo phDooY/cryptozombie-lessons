@@ -1,20 +1,21 @@
 ---
-title: Data Types
-actions:
-  - checkAnswer
-  - hints
+title: 数据类型
+actions: ['checkAnswer', 'hints']
 material:
   editor:
     language: sol
-    0: |
-      
-    1: >
-      
+    startingCode: |
+    answer: >
 ---
-Solidity's code is encapsulated in contracts. A contract is basically...
 
-    contract HelloWorld
-    
-    
+Solidity 代码封装在一种叫“合约(contracts)”的数据结构中。
 
-# Put it to the test
+合约看起来是这样的...
+
+```
+contract HelloWorld
+
+```
+
+# 实战演习
+

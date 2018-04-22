@@ -1,8 +1,6 @@
 ---
-title: Lesson 2 Overview
-actions:
-  - checkAnswer
-  - hints
+title: Обзор Урока 2
+actions: ['Проверить', 'Подсказать']
 material:
   saveZombie: false
   zombieBattle:
@@ -12,24 +10,26 @@ material:
     ignoreZombieCache: true
     answer: 1
 ---
-In lesson 1, we created a function that takes a name, uses it to generate a random zombie, and adds that zombie to our app's zombie database on the blockchain.
 
-In lesson 2, we're going to make our app more game-like: We're going to make it multi-player, and we'll also be adding a more fun way to create zombies instead of just generating them randomly.
+В первом уроке мы создали функцию, которая берет имя, из него генерирует случайного зомби, а потом добавляет его в базу данных блокчейн-приложения.
 
-How will we create new zombies? By having our zombies "feed" on other lifeforms!
+Во втором уроке мы займемся геймифицикацией приложение: добавим многопользовательский режим, а вместо простой случайной генерации сделаем создание зомби более разнообразным.
 
-## Zombie Feeding
+Как же теперь будут появляться новые зомби? Мы заставим старых зомби питаться другими формами жизни! 
 
-When a zombie feeds, it infects the host with a virus. The virus then turns the host into a new zombie that joins your army. The new zombie's DNA will be calculated from the previous zombie's DNA and the host's DNA.
+## Питание зомби
 
-And what do our zombies like to feed on most?
+Когда зомби питается, он передает хозяину вирус. Затем вирус превращает съеденного в нового зомби, который присоединяется к твоей армии. ДНК нового зомби вычисляется из ДНК нападающего зомби и ДНК съеденного.
 
-To find that out... You'll have to complete lesson 2!
+Кем зомби любят питаться больше всего?
 
-# Put it to the test
+Закончи Урок 2 и узнаешь! 
 
-There's a simple demo of feeding to the right. Click on a human to see what happens when your zombie feeds!
+# Попробуй!
 
-You can see that the new zombie's DNA is determined by your original zombie's DNA, as well as the host's DNA.
+Справа — простая демонстрация того, как питается зомби! Кликни на человека, и увидишь что будет, когда зобми его сожрет!
 
-When you're ready, click "Next chapter" to move on, and let's get started by making our game multi-player.
+Видишь, ДНК зомби определяется собсвенной ДНК зомби и ДНК съеденного человека. 
+
+Когда захочешь двигаться дальше, кликай на «Следующая глава», и приступим к созданию многопользовательского режима.
+

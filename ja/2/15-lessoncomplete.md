@@ -1,9 +1,8 @@
 ---
-title: Lesson 2 Complete!
-actions:
-  - checkAnswer
-  - hints
+title: レッスン 2 終了!
+actions: ['答え合わせ', 'ヒント']
 material:
   lessonComplete:
     answer: 1
 ---
+

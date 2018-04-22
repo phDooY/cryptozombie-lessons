@@ -1,10 +1,11 @@
 ---
-title: Making the Zombie Factory
-header: Welcome, human!
+title: Фабрика Зомби
+header: Смелей, человек!
 roadmap: roadmap.jpg
 ---
-So you think you have what it takes to become a **CryptoZombie**, huh?
 
-This course will teach you how to **build a game on Ethereum**.
+Всё ли у тебя есть для того, чтобы стать **КриптоЗомби**?
 
-It's designed for beginners to Solidity, but it assumes you have some experience programming in another language (e.g. Javascript).
+На этом курсе ты научишься, как **создать игру на Ethereum**.
+
+Курс для новичков в Ethereum, но надеемся, что у тебя есть опыт программирования на других языках (например, на Javascript).

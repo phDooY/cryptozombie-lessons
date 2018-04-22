@@ -1,8 +1,6 @@
 ---
-title: Wrapping It Up
-actions:
-  - checkAnswer
-  - hints
+title: まとめ
+actions: ['答え合わせ', 'ヒント']
 requireLogin: true
 skipCheckAnswer: true
 material:
@@ -13,27 +11,28 @@ material:
     hideSliders: true
     answer: 1
 ---
-Congratulations! That concludes Lesson 5.
 
-As a reward, we've transferred you your very own Level 10 **H4XF13LD MORRIS </p> 
+よくここまで頑張ったな! これでレッスン５は終わりだ。
 
-(Omg, the legendary **H4XF13LD MORRIS </p> 
+ご褒美として、お主にレベル10の**H4XF13LD MORRIS 💯💯😎💯💯** ゾンビを与えておいた！
 
-Now you have 4 zombies in your army.
+(何てことだ、あの伝説の **H4XF13LD MORRIS 💯💯😎💯💯** ゾンビだ!!!!)
 
-Before you move on, you have the option to rename any of them if you'd like by clicking on them to the right and entering a new name. (Though I don't know why you would ever want to rename **H4XF13LD MORRIS </p> 
+お主のゾンビ軍団はゾンビ４体になった。
 
-## Let's recap:
+最後にもしゾンビの名前を変えたければ、右側でゾンビをクリックして新しい名前を入力できる。（一体なぜ **H4XF13LD MORRIS💯💯😎💯💯** の名前を変えたがっているのかわからない、最高の名前じゃないか！）
 
-In this lesson we learned about:
+## まとめ:
 
-- Tokens, the ERC721 standard, and tradable assets/zombies
-- Libraries and how to use them
-- How to prevent overflows and underflows using the SafeMath library
-- Commenting your code and the natspec standard
+このレッスンで学んだこと:
 
-This lesson concludes our game's Solidity code! (For now — we may add even more lessons in the future).
+- トークン、ERC721規格、トレード可能な資産/ゾンビ
+- ライブラリとその使い方
+- SafeMath関数を使ったオーバーフローとアンダーフロー対策
+- コード中のコメントとnatspecスタンダード
 
-In the next 2 lessons, we're going to look at how to deploy your contracts and interact with them using ***web3.js*** (so you can build a front-end for your DApp).
+このレッスンで我らがゲームのSolidityコードは終わりだ！(今のところ、将来さらにレッスンを追加するかもしれない)
 
-Go ahead and rename any of your zombies if you like, then proceed to the next chapter to complete the lesson.
+今後２つのレッスンで、コントラクトのデプロイ方法と **_web3.js_** を使った対話の方法をやっていくぞ(DAppのフロントエンドも作れるからな)。
+
+もし希望するならゾンビの名前を変えて、次のチャプターに進んでレッスンを終わりにしよう。

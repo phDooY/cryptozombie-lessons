@@ -1,18 +1,19 @@
 ---
-title: App Front-ends & Web3.js
-header: "Lesson 6: App Front-ends & Web3.js"
+title: Front-ends et Web3.js
+header: "Leçon 6 : Front-ends et Web3.js"
 roadmap: roadmap6.png
 ---
-Huh, you've made it this far?!
 
-You're no ordinary CryptoZombie...
+Hein, vous êtes arrivé jusqu'ici ?!
 
-By completing Lesson 5, you've demonstrated that you have a pretty firm grasp of Solidity.
+Vous n'êtes pas un CryptoZombie ordinaire...
 
-But no DApp is complete without a way for its users to interact with it...
+En finissant la Leçon 5, vous avez prouvé que vous avez une assez bonne compréhension de Solidity.
 
-In this lesson, we're going to look at how to interact with your smart contract and build a basic front-end for your DApp using a library called **Web3.js**.
+Mais aucune DApp est terminée sans un moyen pour ses utilisateurs d'interagir avec...
 
-Note that app front-ends are written in **JavaScript**, not Solidity. But since the focus of this course is on Ethereum / Solidity, we're assuming you are already comfortable building websites with HTML, JavaScript (including ES6 <a href="https://developers.google.com/web/fundamentals/primers/promises" target=_blank>promises</a>), and JQuery, and will not be spending time covering the basics of those languages.
+Dans cette leçon, nous allons voir comment interagir avec votre smart contract et construire un front-end basique pour votre DApp en utilisant une bibliothèque appelée **Web3.js**.
 
-If you are not already comfortable building websites with HTML / Javascript, you should complete a basic tutorial elsewhere before starting this lesson.
+Vous remarquerez que les front-ends sont écrits en **JavaScript**, et non en Solidity. Mais vu que ce cours se concentre sur Ethereum / Solidity, nous supposons que vous êtes déjà à l'aise pour construire un site web en HTML, JavaScript (y compris les <a href="https://developers.google.com/web/fundamentals/primers/promises" target=_blank>promesses</a> ES6), et JQuery, et nous ne passerons pas de temps à expliquer les bases de ces langages.
+
+Si vous n'êtes pas à l'aise pour construire un site web HTML / JavaScript, vous devriez faire un tutoriel de base ailleurs avant de commencer cette leçon.

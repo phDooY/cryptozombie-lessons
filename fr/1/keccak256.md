@@ -1,82 +1,99 @@
 ---
-title: Keccak256 and Typecasting
-actions:
-  - checkAnswer
-  - hints
+title: Keccak256 et conversion de type
+actions: ['vérifierLaRéponse', 'indice']
 material:
   editor:
     language: sol
     startingCode: |
       pragma solidity ^0.4.19;
-      
+
       contract ZombieFactory {
-      
-      uint dnaDigits = 16;
-      uint dnaModulus = 10 ** dnaDigits;
-      
-      struct Zombie {
-      string name;
-      uint dna;
-      }
-      
-      Zombie[] public zombies;
-      
-      function _createZombie(string _name, uint _dna) private {
-      zombies.push(Zombie(_name, _dna));
-      }
-      
-      function _generateRandomDna(string _str) private view returns (uint) {
-      // start here
-      }
-      
+
+          uint dnaDigits = 16;
+          uint dnaModulus = 10 ** dnaDigits;
+
+          struct Zombie {
+              string name;
+              uint dna;
+          }
+
+          Zombie[] public zombies;
+
+          function _createZombie(string _name, uint _dna) private {
+              zombies.push(Zombie(_name, _dna));
+          }
+
+          function _generateRandomDna(string _str) private view returns (uint) {
+              // commencez ici
+          }
+
       }
     answer: >
       pragma solidity ^0.4.19;
-      
+
+
       contract ZombieFactory {
-      uint dnaDigits = 16; uint dnaModulus = 10 ** dnaDigits;
-      struct Zombie { string name; uint dna; }
-      Zombie[] public zombies;
-      function _createZombie(string _name, uint _dna) private { zombies.push(Zombie(_name, _dna)); }
-      function _generateRandomDna(string _str) private view returns (uint) { uint rand = uint(keccak256(_str)); return rand % dnaModulus; }
+
+          uint dnaDigits = 16;
+          uint dnaModulus = 10 ** dnaDigits;
+
+          struct Zombie {
+              string name;
+              uint dna;
+          }
+
+          Zombie[] public zombies;
+
+          function _createZombie(string _name, uint _dna) private {
+              zombies.push(Zombie(_name, _dna));
+          }
+
+          function _generateRandomDna(string _str) private view returns (uint) {
+              uint rand = uint(keccak256(_str));
+              return rand % dnaModulus;
+          }
+
       }
 ---
-We want our `_generateRandomDna` function to return a (semi) random `uint`. How can we accomplish this?
 
-Ethereum has the hash function `keccak256` built in, which is a version of SHA3. A hash function basically maps an input string into a random 256-bit hexidecimal number. A slight change in the string will cause a large change in the hash.
+Comment faire pour que notre fonction `_generateRandomDna` retourne un `uint` (presque) aléatoire ?
 
-It's useful for many purposes in Ethereum, but for right now we're just going to use it for pseudo-random number generation.
+Ethereum a la fonction de hachage `keccak256` intégrée, qui est une variante de SHA3. Une fonction de hachage permet fondamentalement de lier une chaîne d'entrée à un nombre hexadécimal aléatoire de 256 bits. Le moindre changement dans la chaîne provoquera un grand changement dans le hachage.
 
-Example:
+Cela sert à beaucoup de chose pour Ethereum, mais pour l'instant nous allons simplement l'utiliser pour générer un nombre pseudo-aléatoire.
 
-    //6e91ec6b618bb462a4a6ee5aa2cb0e9cf30f7a052bb467b0ba58b8748c00d2e5
-    keccak256("aaaab");
-    //b1f078126895a1424524de5321b339ab00408010b7cf0e6ed451514981e58aa9
-    keccak256("aaaac");
-    
+Exemple:
 
-As you can see, the returned values are totally different despite only a 1 character change in the input.
+```
+//6e91ec6b618bb462a4a6ee5aa2cb0e9cf30f7a052bb467b0ba58b8748c00d2e5
+keccak256("aaaab");
+//b1f078126895a1424524de5321b339ab00408010b7cf0e6ed451514981e58aa9
+keccak256("aaaac");
+```
+Comme vous pouvez le voir, les valeurs retournées sont complètement différentes alors qu'il y a seulement 1 caractère de changé à l'argument d'entrée.
 
-> Note: **Secure** random-number generation in blockchain is a very difficult problem. Our method here is insecure, but since security isn't top priority for our Zombie DNA, it will be good enough for our purposes.
+> Remarque: La génération de nombres aléatoires **sécurisés** dans la blockchain est un problème très complexe. Notre méthode ici n'est pas sécurisée, mais comme la sécurité n'est pas la grande priorité de notre ADN Zombie, cela sera suffisant pour notre usage.
 
-## Typecasting
+## Conversion de type
 
-Sometimes you need to convert between data types. Take the following example:
 
-    uint8 a = 5;
-    uint b = 6;
-    // throws an error because a * b returns a uint, not uint8:
-    uint8 c = a * b; 
-    // we have to typecast b as a uint8 to make it work:
-    uint8 c = a * uint8(b); 
-    
+Il peut être utile de convertir des types de données. Prenons l'exemple suivant :
 
-In the above, `a * b` returns a `uint`, but we were trying to store it as a `uint8`, which could cause potential problems. By casting it as a `uint8`, it works and the compiler won't throw an error.
+```
+uint8 a = 5;
+uint b = 6;
+// renvoie une erreur car a * b renvoie un uint, pas un uint8:
+uint8 c = a * b;
+// Nous devons convertir le type de b en uint8 pour que cela marche :
+uint8 c = a * uint8(b);
+```
 
-# Put it to the test
+Ci-dessus, `a * b` renvoie un `uint`, mais nous essayons de le stocker comme un `uint8`, ce qui pourrait poser problème. En le convertissant en `uint8`, cela marche et le compilateur ne retourne pas d'erreur.
 
-Let's fill in the body of our `_generateRandomDna` function! Here's what it should do:
+# A votre tour.
 
-1. The first line of code should take the `keccak256` hash of `_str` to generate a pseudo-random hexidecimal, typecast it as a `uint`, and finally store the result in a `uint` called `rand`.
+Complétons le corps de notre fonction `_generateRandomDna` ! Voila ce qu'elle devrait faire :
 
-2. We want our DNA to only be 16 digits long (remember our `dnaModulus`?). So the second line of code should `return` the above value modulus (`%`) `dnaModulus`.
+1. La première ligne de code doit prendre le hachage `keccak256` de `_str` pour générer un nombre pseudo-aléatoire hexadécimal, le convertir en un `uint`, et enfin stocker le résultat dans un `uint` nommé `rand`.
+
+2. Nous allons vouloir que notre ADN fasse seulement 16 chiffres de long (vous vous rappelez notre `dnaModulus` ?). La deuxième ligne de code devra retourner la valeur ci-dessus modulo (`%`) `dnaModulus`.

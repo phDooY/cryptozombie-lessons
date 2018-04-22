@@ -1,79 +1,94 @@
 ---
-title: Working With Structs and Arrays
-actions:
-  - checkAnswer
-  - hints
+title: Как работать со структурами и массивами
+actions: ['Проверить', 'Подсказать']
 material:
   editor:
     language: sol
     startingCode: |
       pragma solidity ^0.4.19;
-      
+
       contract ZombieFactory {
-      
-      uint dnaDigits = 16;
-      uint dnaModulus = 10 ** dnaDigits;
-      
-      struct Zombie {
-      string name;
-      uint dna;
-      }
-      
-      Zombie[] public zombies;
-      
-      function createZombie(string _name, uint _dna) {
-      // start here
-      }
-      
+
+          uint dnaDigits = 16;
+          uint dnaModulus = 10 ** dnaDigits;
+
+          struct Zombie {
+              string name;
+              uint dna;
+          }
+
+          Zombie[] public zombies;
+
+          function createZombie(string _name, uint _dna) {
+              // Начало здесь
+          }
+
       }
     answer: >
       pragma solidity ^0.4.19;
-      
+
+
       contract ZombieFactory {
-      uint dnaDigits = 16; uint dnaModulus = 10 ** dnaDigits;
-      struct Zombie { string name; uint dna; }
-      Zombie[] public zombies;
-      function createZombie(string _name, uint _dna) { zombies.push(Zombie(_name, _dna)); }
+
+          uint dnaDigits = 16;
+          uint dnaModulus = 10 ** dnaDigits;
+
+          struct Zombie {
+              string name;
+              uint dna;
+          }
+
+          Zombie[] public zombies;
+
+          function createZombie(string _name, uint _dna) {
+              zombies.push(Zombie(_name, _dna));
+          }
+
       }
 ---
-### Creating New Structs
 
-Remember our `Person` struct in the previous example?
+### Создаем новую структуру
 
-    struct Person {
-      uint age;
-      string name;
-    }
-    
-    Person[] public people;
-    
+Помнишь структуру `Person` (личность) из предыдущего примера?
 
-Now we're going to learn how to create new `Person`s and add them to our `people` array.
+```
+struct Person {
+  uint age;
+  string name;
+}
 
-    // create a New Person:
-    Person satoshi = Person(172, "Satoshi");
-    
-    // Add that person to the Array:
-    people.push(satoshi);
-    
+Person[] public people;
+```
 
-We can also combine these together and do them in one line of code to keep things clean:
+Посмотри, как создать новые личности `Person` и добавить их в массив `people`(люди):
 
-    people.push(Person(16, "Vitalik"));
-    
+```
+// Создать новую личность:
+Person satoshi = Person(172, "Satoshi");
 
-Note that `array.push()` adds something to the **end** of the array, so the elements are in the order we added them. See the following example:
+// Добавить личность в массив:
+people.push(satoshi);
+```
 
-    uint[] numbers;
-    numbers.push(5);
-    numbers.push(10);
-    numbers.push(15);
-    // numbers is now equal to [5, 10, 15]
-    
+Можно совместить и записать одной строчкой, чтобы код выглядел чище:
 
-# Put it to the test
+```
+people.push(Person(16, "Vitalik"));
+```
 
-Let's make our createZombie function do something!
+Обрати внимание, что `array.push()` обозначает конец массива, поэтому элементы выстраиваются в порядке добавления. Пример: 
 
-1. Fill in the function body so it creates a new `Zombie`, and adds it to the `zombies` array. The `name` and `dna` for the new Zombie should come from the function arguments.
-2. Let's do it in one line of code to keep things clean.
+```
+uint[] numbers;
+numbers.push(5);
+numbers.push(10);
+numbers.push(15);
+// Числа равны [5, 10, 15]
+```
+
+# Проверь себя
+
+Заставим функцию createZombie что-нибудь сделать!
+
+1. Заполни тело функции таким образом, чтобы она создавала нового `Zombie` и добавляла его в массив `zombies`. Имя `name` и ДНК `dna` нового зомби должны браться из параметров функции.
+2. Запиши все одной строчкой, чтобы код выглядел чисто.

@@ -1,79 +1,94 @@
 ---
-title: Working With Structs and Arrays
-actions:
-  - checkAnswer
-  - hints
+title: Trabajando con estructuras y arrays
+actions: ['checkAnswer', 'hints']
 material:
   editor:
     language: sol
     startingCode: |
       pragma solidity ^0.4.19;
-      
+
       contract ZombieFactory {
-      
-      uint dnaDigits = 16;
-      uint dnaModulus = 10 ** dnaDigits;
-      
-      struct Zombie {
-      string name;
-      uint dna;
-      }
-      
-      Zombie[] public zombies;
-      
-      function createZombie(string _name, uint _dna) {
-      // start here
-      }
-      
+
+          uint dnaDigits = 16;
+          uint dnaModulus = 10 ** dnaDigits;
+
+          struct Zombie {
+              string name;
+              uint dna;
+          }
+
+          Zombie[] public zombies;
+
+          function createZombie(string _name, uint _dna) {
+              // empieza aquí
+          }
+
       }
     answer: >
       pragma solidity ^0.4.19;
-      
+
+
       contract ZombieFactory {
-      uint dnaDigits = 16; uint dnaModulus = 10 ** dnaDigits;
-      struct Zombie { string name; uint dna; }
-      Zombie[] public zombies;
-      function createZombie(string _name, uint _dna) { zombies.push(Zombie(_name, _dna)); }
+
+          uint dnaDigits = 16;
+          uint dnaModulus = 10 ** dnaDigits;
+
+          struct Zombie {
+              string name;
+              uint dna;
+          }
+
+          Zombie[] public zombies;
+
+          function createZombie(string _name, uint _dna) {
+              zombies.push(Zombie(_name, _dna));
+          }
+
       }
 ---
-### Creating New Structs
 
-Remember our `Person` struct in the previous example?
+### Creando nuevas Estructuras (Structs)
 
-    struct Person {
-      uint age;
-      string name;
-    }
-    
-    Person[] public people;
-    
+¿Recuerdas las estructura `Person` en el ejemplo anterior?
 
-Now we're going to learn how to create new `Person`s and add them to our `people` array.
+```
+struct Person {
+  uint age;
+  string name;
+}
 
-    // create a New Person:
-    Person satoshi = Person(172, "Satoshi");
-    
-    // Add that person to the Array:
-    people.push(satoshi);
-    
+Person[] public people;
+```
 
-We can also combine these together and do them in one line of code to keep things clean:
+Ahora aprenderemos como crear un nuevo `Person` y añadirlo a nuestro array `people`.
 
-    people.push(Person(16, "Vitalik"));
-    
+```
+// crear un nuevo `Person`
+Person satoshi = Person(172, "Satoshi");
 
-Note that `array.push()` adds something to the **end** of the array, so the elements are in the order we added them. See the following example:
+// añadir esta persona a nuestro array
+people.push(satoshi);
+```
 
-    uint[] numbers;
-    numbers.push(5);
-    numbers.push(10);
-    numbers.push(15);
-    // numbers is now equal to [5, 10, 15]
-    
+También podemos combinar estas dos cosas para hacerlas en una sola línea y mantener el código limpio:
 
-# Put it to the test
+```
+people.push(Person(16, "Vitalik"));
+```
 
-Let's make our createZombie function do something!
+Date cuenta que `array.push()` añade algo al **final** del array, así que los elementos siguen el orden de añadido. Observa este ejemplo:
 
-1. Fill in the function body so it creates a new `Zombie`, and adds it to the `zombies` array. The `name` and `dna` for the new Zombie should come from the function arguments.
-2. Let's do it in one line of code to keep things clean.
+```
+uint[] numbers;
+numbers.push(5);
+numbers.push(10);
+numbers.push(15);
+// el array `numbers` es ahora [5, 10, 15]
+```
+
+# Vamos a probarlo
+
+¡Hagamos hacer algo a nuestra función `createZombie`!
+
+1. Rellena el cuerpo de la función para que cree un nuevo `Zombie` y añádelo al array `zombies`. El nombre (`name`) y ADN (`dna`) del nuevo Zombi debería venir de los argumentos pasados a la función.
+2. Hagámoslo en una sola línea de código para que quede bonito.

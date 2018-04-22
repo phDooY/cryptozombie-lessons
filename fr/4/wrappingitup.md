@@ -1,8 +1,6 @@
 ---
-title: Wrapping It Up
-actions:
-  - checkAnswer
-  - hints
+title: Conclusion
+actions: ['vérifierLaRéponse', 'indice']
 requireLogin: true
 material:
   saveZombie: true
@@ -12,18 +10,20 @@ material:
     hideSliders: true
     answer: 1
 ---
-Congratulations! That concludes Lesson 4.
 
-Go ahead and test out your battle function to the right!
+Félicitations ! Cela termine la Leçon 4.
 
-## Claim your reward
+Allez-y et testez votre fonction de combat à droite !
 
-After winning the battle:
 
-1. Your zombie will level up
+## Revendiquer votre récompense
 
-2. Your zombie will increase his `winCount`
+Après avoir gagné le combat :
 
-3. You will spawn a new zombie to add to your army!
+1. Votre zombie aura un niveau de plus
 
-Go ahead and try the battle, then proceed to the next chapter to complete the lesson.
+2. Votre zombie augmentera son compte `winCount`
+
+3. Vous aurez un nouveau zombie à votre armée !
+
+Allez-y et essayez le combat, puis passez au prochain chapitre pour terminer la leçon.

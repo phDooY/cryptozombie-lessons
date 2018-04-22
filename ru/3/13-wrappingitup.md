@@ -1,8 +1,6 @@
 ---
-title: Wrapping It Up
-actions:
-  - checkAnswer
-  - hints
+title: Подведем итог
+actions: ['Проверить', 'Подсказать']
 requireLogin: true
 material:
   saveZombie: false
@@ -12,21 +10,22 @@ material:
     hideSliders: true
     answer: 1
 ---
-Congratulations! That concludes Lesson 3.
 
-## Let's recap:
+Наши поздравления! Урок 3 завершен.
 
-- We've added a way to update our CryptoKitties contracts
-- We've learned to protect core functions with `onlyOwner`
-- We've learned about gas and gas optimization
-- We added levels and cooldowns to our zombies
-- We now have functions to update a zombie's name and DNA once the zombie gets above a certain level
-- And finally, we now have a function to return a user's zombie army
+## Напомним:
 
-## Claim your reward
+- Мы добавили способ обновления адреса контракта Криптокотиков 
+- Мы научились защищать основные функции с помощью `onlyOwner`
+- Мы узнали о газе и его оптимизации
+- Добавили уровни и время перезарядки для зомби 
+- Сейчас у нас есть функция изменения имени и ДНК при достижении зомби определенного уровня 
+- И, наконец, теперь у нас есть функция возврата всей зомби-армии  
 
-As a reward for completing Lesson 3, both of your zombies have leveled up!
+## Тебе положен подарок!
 
-And now that NoName (the kitty-zombie you created in Lesson 2), is upgraded to level 2, you can call `changeName` to give him/her a name. NoName no more!
+В качестве вознаграждения за завершение Урока 3 оба твоих зомби получают новый уровень! 
 
-Go ahead and give NoName a name, then proceed to the next chapter to complete the lesson.
+Теперь, когда безымянный зомбокотик из Урока 2 получил уровень, ты можешь вызвать `changeName` и назвать его как тебе нравится. Хватит ноунеймов!
+
+Вперед! Дай имя зомби и двигайся к следующему разделу, чтобы закончить урок. 

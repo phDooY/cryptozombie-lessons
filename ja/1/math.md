@@ -1,42 +1,47 @@
 ---
-title: Math Operations
-actions:
-  - checkAnswer
-  - hints
+title: 数式演算
+actions: ['答え合わせ', 'ヒント']
 material:
   editor:
     language: sol
     startingCode: |
       pragma solidity ^0.4.19;
-      
+
       contract ZombieFactory {
-      
-      uint dnaDigits = 16;
-      //start here
-      
+
+          uint dnaDigits = 16;
+          //ここから開始するのだ
+
       }
     answer: >
       pragma solidity ^0.4.19;
-      
+
+
       contract ZombieFactory {
-      uint dnaDigits = 16; uint dnaModulus = 10 ** dnaDigits;
+
+          uint dnaDigits = 16;
+          uint dnaModulus = 10 ** dnaDigits;
+
       }
+
 ---
-Math in Solidity is pretty straightforward. The following operations are the same as in most programming languages:
 
-* Addition: `x + y`
-* Subtraction: `x - y`,
-* Multiplication: `x * y`
-* Division: `x / y`
-* Modulus / remainder: `x % y` *(for example, `13 % 5` is `3`, because if you divide 5 into 13, 3 is the remainder)*
+Solidityで使う数式は誰でもわかるような簡単なものだ。他のプログラム言語と全く同じだと思ってもらっていい：
 
-Solidity also supports an ***exponential operator*** (i.e. "x to the power of y", x^y):
+* 加算（足し算）: `x + y`
+* 減算（引き算）: `x - y`,
+* 乗算（掛け算）: `x * y`
+* 除算（割り算）: `x / y`
+* 剰余（余り）: `x % y` _(例えば、`13 % 5` は `3`になる。なぜかというと、5を13で割ると、余りが3だからだ.)_
 
-    uint x = 5 ** 2; // equal to 5^2 = 25
-    
+Solidityは**_指数演算子_**もサポートしている。(例 "xのy乗"、 x^y):
 
-# Put it to the test
+```
+uint x = 5 ** 2; // 5^2 = 25 と同様
+```
 
-To make sure our Zombie's DNA is only 16 characters, let's make another `uint` equal to 10^16. That way we can later use the modulus operator `%` to shorten an integer to 16 digits.
+# テストの実行
 
-1. Create a `uint` named `dnaModulus`, and set it equal to **10 to the power of `dnaDigits`**.
+ゾンビのDNAが16桁の数字だと確認するために、別の`uint`を作成して10^16と設定せよ。後のレクチャーでは剰余演算子である `%`を使用して整数を16桁に縮小できる。
+
+1. `dnaModulus`という名前の `uint`を作成し、**10の`dnaDigits`乗**に設定せよ。

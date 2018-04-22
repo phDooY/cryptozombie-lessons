@@ -1,79 +1,94 @@
 ---
-title: Working With Structs and Arrays
-actions:
-  - checkAnswer
-  - hints
+title: 構造体と配列の操作
+actions: ['答え合わせ', 'ヒント']
 material:
   editor:
     language: sol
     startingCode: |
       pragma solidity ^0.4.19;
-      
+
       contract ZombieFactory {
-      
-      uint dnaDigits = 16;
-      uint dnaModulus = 10 ** dnaDigits;
-      
-      struct Zombie {
-      string name;
-      uint dna;
-      }
-      
-      Zombie[] public zombies;
-      
-      function createZombie(string _name, uint _dna) {
-      // start here
-      }
-      
+
+          uint dnaDigits = 16;
+          uint dnaModulus = 10 ** dnaDigits;
+
+          struct Zombie {
+              string name;
+              uint dna;
+          }
+
+          Zombie[] public zombies;
+
+          function createZombie(string _name, uint _dna) {
+              // ここから始めるのだ
+          }
+
       }
     answer: >
       pragma solidity ^0.4.19;
-      
+
+
       contract ZombieFactory {
-      uint dnaDigits = 16; uint dnaModulus = 10 ** dnaDigits;
-      struct Zombie { string name; uint dna; }
-      Zombie[] public zombies;
-      function createZombie(string _name, uint _dna) { zombies.push(Zombie(_name, _dna)); }
+
+          uint dnaDigits = 16;
+          uint dnaModulus = 10 ** dnaDigits;
+
+          struct Zombie {
+              string name;
+              uint dna;
+          }
+
+          Zombie[] public zombies;
+
+          function createZombie(string _name, uint _dna) {
+              zombies.push(Zombie(_name, _dna));
+          }
+
       }
 ---
-### Creating New Structs
 
-Remember our `Person` struct in the previous example?
+### 新しい構造体を作る
 
-    struct Person {
-      uint age;
-      string name;
-    }
-    
-    Person[] public people;
-    
+前回の例で使った`Person`構造体を覚えているか？
 
-Now we're going to learn how to create new `Person`s and add them to our `people` array.
+```
+struct Person {
+  uint age;
+  string name;
+}
 
-    // create a New Person:
-    Person satoshi = Person(172, "Satoshi");
-    
-    // Add that person to the Array:
-    people.push(satoshi);
-    
+Person[] public people;
+```
 
-We can also combine these together and do them in one line of code to keep things clean:
+さて、今度は新しい`Person`を作成して、それを`people`配列に格納する方法を教えるぞ。
 
-    people.push(Person(16, "Vitalik"));
-    
+```
+// 新しいPersonを作る：
+Person satoshi = Person(172, "Satoshi");
 
-Note that `array.push()` adds something to the **end** of the array, so the elements are in the order we added them. See the following example:
+// それを配列に格納する：
+people.push(satoshi);
+```
 
-    uint[] numbers;
-    numbers.push(5);
-    numbers.push(10);
-    numbers.push(15);
-    // numbers is now equal to [5, 10, 15]
-    
+全部まとめて1行で書けば、さらにスッキリできるぞ：
 
-# Put it to the test
+```
+people.push(Person(16, "Vitalik"));
+```
 
-Let's make our createZombie function do something!
+`array.push()`は配列の**最後**に何かを追加するので、要素は追加した順番になります。次の例を参照してください：
 
-1. Fill in the function body so it creates a new `Zombie`, and adds it to the `zombies` array. The `name` and `dna` for the new Zombie should come from the function arguments.
-2. Let's do it in one line of code to keep things clean.
+```
+uint[] numbers;
+numbers.push(5);
+numbers.push(10);
+numbers.push(15);
+// 数字は [5, 10, 15]
+```
+
+# それではテストだ
+
+createZombie関数を実際に動かすぞ！
+
+1. 新しい`Zombie`を作れるように関数の中身を埋めて、それを `zombies` 配列に格納せよ。但し、新しいZombieの`name` と `dna`は関数の引数を使用せよ。
+2. 書いたコードを1行で書き直してスッキリさせよ。

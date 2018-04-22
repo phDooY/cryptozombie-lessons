@@ -1,60 +1,71 @@
 ---
-title: Private / Public Functions
-actions:
-  - checkAnswer
-  - hints
+title: Private / Public 関数
+actions: ['答え合わせ', 'ヒント']
 material:
   editor:
     language: sol
     startingCode: |
       pragma solidity ^0.4.19;
-      
+
       contract ZombieFactory {
-      
-      uint dnaDigits = 16;
-      uint dnaModulus = 10 ** dnaDigits;
-      
-      struct Zombie {
-      string name;
-      uint dna;
-      }
-      
-      Zombie[] public zombies;
-      
-      function createZombie(string _name, uint _dna) {
-      zombies.push(Zombie(_name, _dna));
-      }
-      
+
+          uint dnaDigits = 16;
+          uint dnaModulus = 10 ** dnaDigits;
+
+          struct Zombie {
+              string name;
+              uint dna;
+          }
+
+          Zombie[] public zombies;
+
+          function createZombie(string _name, uint _dna) {
+              zombies.push(Zombie(_name, _dna));
+          }
+
       }
     answer: >
       pragma solidity ^0.4.19;
-      
+
+
       contract ZombieFactory {
-      uint dnaDigits = 16; uint dnaModulus = 10 ** dnaDigits;
-      struct Zombie { string name; uint dna; }
-      Zombie[] public zombies;
-      function _createZombie(string _name, uint _dna) private { zombies.push(Zombie(_name, _dna)); }
+
+          uint dnaDigits = 16;
+          uint dnaModulus = 10 ** dnaDigits;
+
+          struct Zombie {
+              string name;
+              uint dna;
+          }
+
+          Zombie[] public zombies;
+
+          function _createZombie(string _name, uint _dna) private {
+              zombies.push(Zombie(_name, _dna));
+          }
+
       }
 ---
-In Solidity, functions are `public` by default. This means anyone (or any other contract) can call your contract's function and execute its code.
 
-Obviously this isn't always desireable, and can make your contract vulnerable to attacks. Thus it's good practice to mark your functions as `private` by default, and then only make `public` the functions you want to expose to the world.
+Solidityでは、関数はデフォルトで`public`になっている。要するに誰でも（別のコントラクトからでも）君のコントラクトの関数を呼び出して、実行できるということだ。 
 
-Let's look at how to declare a private function:
+これは当然愉快なことではないし、攻撃に対してコントラクトが脆弱になることになる。だから、自分が使う関数はデフォルトで`private`にして、公開しても構わない関数だけを`public`に設定するのだと、心がけておくように。
 
-    uint[] numbers;
-    
-    function _addToArray(uint _number) private {
-      numbers.push(_number);
-    }
-    
+では、private関数の宣言方法を教えるぞ：
 
-This means only other functions within our contract will be able to call this function and add to the `numbers` array.
+```
+uint[] numbers;
 
-As you can see, we use the keyword `private` after the function name. And as with function parameters, it's convention to start private function names with an underscore (`_`).
+function _addToArray(uint _number) private {
+  numbers.push(_number);
+}
+```
+このように書くと、この関数はコントラクト内の他の関数からだけ呼び出して、`numbers`配列に格納できる。
 
-# Put it to the test
+見ればわかる通り、関数名の後に `private`とつけるのだ。関数のパラメーターと同様に、アンダースコア(`_`)で始めるのが通例だから覚えておくように。
 
-Our contract's `createZombie` function is currently public by default — this means anyone could call it and create a new Zombie in our contract! Let's make it private.
+# それではテストだ
 
-1. Modify `createZombie` so it's a private function. Don't forget the naming convention!
+我々の`createZombie`コントラクトはデフォルトでpublicになっている。つまりだれでもコントラクトから関数を呼び出してゾンビを作れるということだ！これはあってはならないことだから、privateに変えなければならない。
+
+1. private関数になるように、`createZombie`を編集せよ。名付けの通例を忘れるなよ！

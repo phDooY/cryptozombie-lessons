@@ -1,29 +1,28 @@
 ---
-title: Wrapping It Up
-actions:
-  - checkAnswer
-  - hints
+title: 放在一起
+actions: ['checkAnswer', 'hints']
 requireLogin: true
 material:
-  saveZombie: true
+  saveZombie: false
   battleArena:
     zombie:
       lesson: 2
     hideSliders: true
     answer: 1
 ---
-Congratulations! That concludes Lesson 4.
 
-Go ahead and test out your battle function to the right!
+恭喜你啊，又完成了第四课。
 
-## Claim your reward
+在右边测试你的战斗函数把。
 
-After winning the battle:
+## 认领你的战利品
 
-1. Your zombie will level up
+在赢了战斗之后：
 
-2. Your zombie will increase his `winCount`
+1. 你的僵尸将会升级
 
-3. You will spawn a new zombie to add to your army!
+2. 你僵尸的 `winCount` 将会增加
 
-Go ahead and try the battle, then proceed to the next chapter to complete the lesson.
+3. 你将为你的僵尸大军获得一个新的僵尸
+
+继续测试战斗，玩够了以后点击下一章来完成本课。

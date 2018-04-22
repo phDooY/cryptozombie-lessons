@@ -1,8 +1,6 @@
 ---
 title: Immutability of Contracts
-actions:
-  - checkAnswer
-  - hints
+actions: ['答え合わせ', 'ヒント']
 requireLogin: true
 material:
   editor:
@@ -10,130 +8,167 @@ material:
     startingCode:
       "zombiefeeding.sol": |
         pragma solidity ^0.4.19;
-        
+
         import "./zombiefactory.sol";
-        
+
         contract KittyInterface {
-        function getKitty(uint256 _id) external view returns (
-        bool isGestating,
-        bool isReady,
-        uint256 cooldownIndex,
-        uint256 nextActionAt,
-        uint256 siringWithId,
-        uint256 birthTime,
-        uint256 matronId,
-        uint256 sireId,
-        uint256 generation,
-        uint256 genes
-        );
+          function getKitty(uint256 _id) external view returns (
+            bool isGestating,
+            bool isReady,
+            uint256 cooldownIndex,
+            uint256 nextActionAt,
+            uint256 siringWithId,
+            uint256 birthTime,
+            uint256 matronId,
+            uint256 sireId,
+            uint256 generation,
+            uint256 genes
+          );
         }
-        
+
         contract ZombieFeeding is ZombieFactory {
-        
-        // 1. Remove this:
-        address ckAddress = 0x06012c8cf97BEaD5deAe237070F9587f8E7A266d;
-        // 2. Change this to just a declaration:
-        KittyInterface kittyContract = KittyInterface(ckAddress);
-        
-        // 3. Add setKittyContractAddress method here
-        
-        function feedAndMultiply(uint _zombieId, uint _targetDna, string _species) public {
-        require(msg.sender == zombieToOwner[_zombieId]);
-        Zombie storage myZombie = zombies[_zombieId];
-        _targetDna = _targetDna % dnaModulus;
-        uint newDna = (myZombie.dna + _targetDna) / 2;
-        if (keccak256(_species) == keccak256("kitty")) {
-        newDna = newDna - newDna % 100 + 99;
-        }
-        _createZombie("NoName", newDna);
-        }
-        
-        function feedOnKitty(uint _zombieId, uint _kittyId) public {
-        uint kittyDna;
-        (,,,,,,,,,kittyDna) = kittyContract.getKitty(_kittyId);
-        feedAndMultiply(_zombieId, kittyDna, "kitty");
-        }
-        
+
+          // 1. これは削除せよ：
+          address ckAddress = 0x06012c8cf97BEaD5deAe237070F9587f8E7A266d;
+          // 2.これを単なる宣言に変更せよ：
+          KittyInterface kittyContract = KittyInterface(ckAddress);
+
+          // 3. setKittyContractAddress メソッドをここに追加せよ
+
+          function feedAndMultiply(uint _zombieId, uint _targetDna, string _species) public {
+            require(msg.sender == zombieToOwner[_zombieId]);
+            Zombie storage myZombie = zombies[_zombieId];
+            _targetDna = _targetDna % dnaModulus;
+            uint newDna = (myZombie.dna + _targetDna) / 2;
+            if (keccak256(_species) == keccak256("kitty")) {
+              newDna = newDna - newDna % 100 + 99;
+            }
+            _createZombie("NoName", newDna);
+          }
+
+          function feedOnKitty(uint _zombieId, uint _kittyId) public {
+            uint kittyDna;
+            (,,,,,,,,,kittyDna) = kittyContract.getKitty(_kittyId);
+            feedAndMultiply(_zombieId, kittyDna, "kitty");
+          }
+
         }
       "zombiefactory.sol": |
         pragma solidity ^0.4.19;
-        
+
         contract ZombieFactory {
-        
-        event NewZombie(uint zombieId, string name, uint dna);
-        
-        uint dnaDigits = 16;
-        uint dnaModulus = 10 ** dnaDigits;
-        
-        struct Zombie {
-        string name;
-        uint dna;
-        }
-        
-        Zombie[] public zombies;
-        
-        mapping (uint => address) public zombieToOwner;
-        mapping (address => uint) ownerZombieCount;
-        
-        function _createZombie(string _name, uint _dna) internal {
-        uint id = zombies.push(Zombie(_name, _dna)) - 1;
-        zombieToOwner[id] = msg.sender;
-        ownerZombieCount[msg.sender]++;
-        NewZombie(id, _name, _dna);
-        }
-        
-        function _generateRandomDna(string _str) private view returns (uint) {
-        uint rand = uint(keccak256(_str));
-        return rand % dnaModulus;
-        }
-        
-        function createRandomZombie(string _name) public {
-        require(ownerZombieCount[msg.sender] == 0);
-        uint randDna = _generateRandomDna(_name);
-        randDna = randDna - randDna % 100;
-        _createZombie(_name, randDna);
-        }
-        
+
+            event NewZombie(uint zombieId, string name, uint dna);
+
+            uint dnaDigits = 16;
+            uint dnaModulus = 10 ** dnaDigits;
+
+            struct Zombie {
+                string name;
+                uint dna;
+            }
+
+            Zombie[] public zombies;
+
+            mapping (uint => address) public zombieToOwner;
+            mapping (address => uint) ownerZombieCount;
+
+            function _createZombie(string _name, uint _dna) internal {
+                uint id = zombies.push(Zombie(_name, _dna)) - 1;
+                zombieToOwner[id] = msg.sender;
+                ownerZombieCount[msg.sender]++;
+                NewZombie(id, _name, _dna);
+            }
+
+            function _generateRandomDna(string _str) private view returns (uint) {
+                uint rand = uint(keccak256(_str));
+                return rand % dnaModulus;
+            }
+
+            function createRandomZombie(string _name) public {
+                require(ownerZombieCount[msg.sender] == 0);
+                uint randDna = _generateRandomDna(_name);
+                randDna = randDna - randDna % 100;
+                _createZombie(_name, randDna);
+            }
+
         }
     answer: >
       pragma solidity ^0.4.19;
+
       import "./zombiefactory.sol";
-      contract KittyInterface { function getKitty(uint256 _id) external view returns ( bool isGestating, bool isReady, uint256 cooldownIndex, uint256 nextActionAt, uint256 siringWithId, uint256 birthTime, uint256 matronId, uint256 sireId, uint256 generation, uint256 genes ); }
+
+      contract KittyInterface {
+        function getKitty(uint256 _id) external view returns (
+          bool isGestating,
+          bool isReady,
+          uint256 cooldownIndex,
+          uint256 nextActionAt,
+          uint256 siringWithId,
+          uint256 birthTime,
+          uint256 matronId,
+          uint256 sireId,
+          uint256 generation,
+          uint256 genes
+        );
+      }
+
       contract ZombieFeeding is ZombieFactory {
-      KittyInterface kittyContract;
-      function setKittyContractAddress(address _address) external { kittyContract = KittyInterface(_address); }
-      function feedAndMultiply(uint _zombieId, uint _targetDna, string _species) public { require(msg.sender == zombieToOwner[_zombieId]); Zombie storage myZombie = zombies[_zombieId]; _targetDna = _targetDna % dnaModulus; uint newDna = (myZombie.dna + _targetDna) / 2; if (keccak256(_species) == keccak256("kitty")) { newDna = newDna - newDna % 100 + 99; } _createZombie("NoName", newDna); }
-      function feedOnKitty(uint _zombieId, uint _kittyId) public { uint kittyDna; (,,,,,,,,,kittyDna) = kittyContract.getKitty(_kittyId); feedAndMultiply(_zombieId, kittyDna, "kitty"); }
+
+        KittyInterface kittyContract;
+
+        function setKittyContractAddress(address _address) external {
+          kittyContract = KittyInterface(_address);
+        }
+
+        function feedAndMultiply(uint _zombieId, uint _targetDna, string _species) public {
+          require(msg.sender == zombieToOwner[_zombieId]);
+          Zombie storage myZombie = zombies[_zombieId];
+          _targetDna = _targetDna % dnaModulus;
+          uint newDna = (myZombie.dna + _targetDna) / 2;
+          if (keccak256(_species) == keccak256("kitty")) {
+            newDna = newDna - newDna % 100 + 99;
+          }
+          _createZombie("NoName", newDna);
+        }
+
+        function feedOnKitty(uint _zombieId, uint _kittyId) public {
+          uint kittyDna;
+          (,,,,,,,,,kittyDna) = kittyContract.getKitty(_kittyId);
+          feedAndMultiply(_zombieId, kittyDna, "kitty");
+        }
+
       }
 ---
-Up until now, Solidity has looked quite similar to other languages like JavaScript. But there are a number of ways that Ethereum DApps are actually quite different from normal applications.
 
-To start with, after you deploy a contract to Ethereum, it’s ***immutable***, which means that it can never be modified or updated again.
+今までやってきてわかっただろうが、SolidityはJavaScriptに似ている言語だ。しかし、イーサリアムのDAppは普通のアプリケーションとはかなり違う点があるから、それを教えていくぞ。
 
-The initial code you deploy to a contract is there to stay, permanently, on the blockchain. This is one reason security is such a huge concern in Solidity. If there's a flaw in your contract code, there's no way for you to patch it later. You would have to tell your users to start using a different smart contract address that has the fix.
+まず、コントラクトをイーサリアム上にデプロイすると、**_イミュータブル_**になる。つまり編集も更新もできなくなるということだ。
 
-But this is also a feature of smart contracts. The code is law. If you read the code of a smart contract and verify it, you can be sure that every time you call a function it's going to do exactly what the code says it will do. No one can later change that function and give you unexpected results.
+コントラクトにデプロイした最初のコードは永久にブロックチェーン上に残ることになる。これがSolidityにとってセキュリティが極めて重要になる理由の1つだ。コントラクトに何か欠陥があっても、それをあとで修正する方法はない。その場合は、問題点を直した別のスマートコントラクトを使用してほしいと、ユーザーに伝えるしかないのだ。
 
-## External dependencies
+これはスマートコントラクトの機能でもある。コードは法のようなものだ。スマートコントラクトのコードに書かれていることは、関数を呼び出すたびに毎回その通りに正確に実行される。誰もその関数を変更して、期待と違う動作をさせることは出来ない。
 
-In Lesson 2, we hard-coded the CryptoKitties contract address into our DApp. But what would happen if the CryptoKitties contract had a bug and someone destroyed all the kitties?
+## 外部依存関係
 
-It's unlikely, but if this did happen it would render our DApp completely useless — our DApp would point to a hardcoded address that no longer returned any kitties. Our zombies would be unable to feed on kitties, and we'd be unable to modify our contract to fix it.
+レッスン 2では、クリプトキティーズのコントラクトのアドレスはハードコードにしたな。ではもしクリプトキティーズのコントラクトにバグがあり、何者かによってすべてのキティーが破壊されたらどうなるかな？
 
-For this reason, it often makes sense to have functions that will allow you to update key portions of the DApp.
+まぁ、実際にこんなことは起こり得ないが、実際に起こった場合、我々のDAppは全く使い物にならなくなる。ハードコードで指定したアドレスで、子猫（キティー）を呼び出せなくなるからだ。ゾンビは子猫たちを餌にすることができなくなり、しかもコントラクトを修正して直すこともできないのだ。
 
-For example, instead of hard coding the CryptoKitties contract address into our DApp, we should probably have a `setKittyContractAddress` function that lets us change this address in the future in case something happens to the CryptoKitties contract.
+こうした理由で、大切な部分に関してはDAppを更新できる機能があったほうがいいのだ。
 
-## Put it to the test
+例えば、クリプトキティーズのコントラクトをハードコーディングする代わりに、`setKittyContractAddress`という関数を設定しておけば、あとでクリプトキティーズのコントラクトに何かあった場合には、アドレスが変更できるようにできるのだ。わかるな。
 
-Let's update our code from Lesson 2 to be able to change the CryptoKitties contract address.
+## それではテストだ
 
-1. Delete the line of code where we hard-coded `ckAddress`.
+レッスン2で使ったクリプトキティーズコントラクトのアドレスを変更できるように変えるのだ。
 
-2. Change the line where we created `kittyContract` to just declare the variable — i.e. don't set it equal to anything.
+1. ハードコードした`ckAddress`の行を削除せよ
 
-3. Create a function called `setKittyContractAddress`. It will take one argument, `_address` (an `address`), and it should be an `external` function.
+2. `kittyContract`を作成した行を、単なる変数の宣言に変更せよ(変数に何もセットしてはならない)
 
-4. Inside the function, add one line of code that sets `kittyContract` equal to `KittyInterface(_address)`.
+3. `setKittyContractAddress`という関数を作成せよ。引数を`_address` ( `address`)とすること。また`external`関数で設定せよ。
 
-> Note: If you notice a security hole with this function, don't worry — we'll fix it in the next chapter ;)
+4. 関数の中に、`kittyContract`に`KittyInterface(_address)`を設定する1行を追加せよ。
+
+> 注：この関数でセキュリティホールが見つかった場合でも、無視して構いません。次のチャプターで修正します　;)

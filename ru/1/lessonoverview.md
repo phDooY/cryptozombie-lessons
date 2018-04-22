@@ -1,8 +1,6 @@
 ---
-title: Lesson Overview
-actions:
-  - checkAnswer
-  - hints
+title: Обзор урока
+actions: ['Проверить', 'Подсказать']
 skipCheckAnswer: true
 material:
   saveZombie: false
@@ -11,31 +9,33 @@ material:
     ignoreZombieCache: true
     answer: 1
 ---
-In Lesson 1, you're going to build a "Zombie Factory" to build an army of zombies.
 
-* Our factory will maintain a database of all zombies in our army
-* Our factory will have a function for creating new zombies
-* Each zombie will have a random and unique appearance
+В Уроке 1 тобой была создана «Фабрика Зомби» с целью собрать зомби-армию. 
 
-In later lessons, we'll add more functionality, like giving zombies the ability to attack humans or other zombies! But before we get there, we have to add the basic functionality of creating new zombies.
+* Фабрика будет содержать данные всех зомби в армии
+* У фабрики будет функция создания новых зомби
+* У каждого зомби будет случайный уникальный внешний вид
 
-## How Zombie DNA Works
+В следующих уроках мы добавим больше функционала, например, сделаем так, чтобы зомби мог нападать на людей и других зомби! Но пока мы будем добираться до этого момента, напишем базовый функционал создания новых зомби. 
 
-The zombie's appearance will be based on its "Zombie DNA". Zombie DNA is simple — it's a 16-digit integer, like:
+## Как устроена ДНК зомби 
 
-    8356281049284737
-    
+Внешний вид зомби обусловлен его ДНК. ДНК зомби — простое целое число из 16 цифр, например: 
 
-Just like real DNA, different parts of this number will map to different traits. The first 2 digits map to the zombie's head type, the second 2 digits to the zombie's eyes, etc.
+```
+8356281049284737
+```
 
-> Note: For this tutorial, we've kept things simple, and our zombies can have only 7 different types of heads (even though 2 digits allow 100 possible options). Later on we could add more head types if we wanted to increase the number of zombie variations.
+Как и в настоящей ДНК, различные части этого числа будут отражать специфические черты. Первые две цифры определяют внешний вид головы зомби, следующие две — разрез глаз и так далее. 
 
-For example, the first 2 digits of our example DNA above are `83`. To map that to the zombie's head type, we do `83 % 7 + 1` = 7. So this Zombie would have the 7th zombie head type.
+> Примечание: это сильно упрощенный урок, поэтому у зомби возможно только 7 разных типов голов (хотя из 2 цифр можно получить 100 возможных вариантов). Если мы захотим увеличить число вариантов зомби, то потом добавим больше типов голов. 
 
-In the panel to the right, go ahead and move the `head gene` slider to the 7th head (the Santa hat) to see what trait the `83` would correspond to.
+Например, первые 2 цифры зомби-ДНК, приведенной выше, равны `83`. Чтобы определить тип головы зомби, мы выполняем операцию `83 % 7 + 1` = 7. Этот зомби получит седьмой тип головы.
 
-# Put it to the test
+Чтобы увидеть, какой черте соответствует `83`, в правой панели сдвинь слайдер `head gene` (ген головы) до типа 7. Это шапка Санта Клауса!
 
-1. Play with the sliders on the right side of the page. Experiment to see how the different numerical values correspond to different aspects of the zombie's appearance.
+# Попробуй!
 
-Ok, enough playing around. When you're ready to continue, hit "Next Chapter" below, and let's dive into learning Solidity!
+1. Поиграй со слайдером в правой части страницы и увидишь, как различные цифровые комбинации соответствуют разным аспектам внешнего вида зомби. 
+
+Ладно, поигрались и хватит. Когда надоест, нажми на кнопку «Следующая глава» внизу страницы, и погрузись в изучение Solidity целиком! 

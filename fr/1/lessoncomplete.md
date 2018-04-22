@@ -1,22 +1,21 @@
 ---
-title: Lesson 1 Complete!
-actions:
-  - checkAnswer
-  - hints
+title: Leçon 1 complétée !
+actions: ['vérifierLaRéponse', 'indice']
 material:
   lessonComplete:
     answer: 1
 ---
-Congratulations! You have completed lesson 1, and you have created the first zombie in your army.
 
-# Next Steps
+Félicitations ! Vous avez terminé la Leçon 1, et vous avez créé le premier zombie de votre armée.
 
-This is just the beginning. We will be releasing a new CryptoZombies lesson each week, to build out the game further and further and keep growing your zombie army.
+# Prochaines étapes
 
-### 1. Sign in to save your progress
+Ce n'est que le début. Chaque semaine, nous allons publier une nouvelle leçon CryptoZombies, pour faire évoluer le jeu de plus en plus et continuer de faire grandir votre armée de zombies.
 
-***Sign in*** to save your progress by clicking the "Save Progress" link at the top of the page. We'll let you know as soon as we add a new lesson.
+### 1. Connectez-vous pour sauvegarder vos progrès
 
-### 2. Share your zombie with your friends
+**_Connectez-vous_** pour sauvegarder vos progrès en cliquant sur le lien "Sauvegarder" en haut de la page. Nous vous informerons dès qu'une nouvelle leçon sera disponible.
 
-***Share*** your zombie on Twitter, blah blah, etc. (Need to insert images / links)
+### 2. Partagez votre zombie avec vos amis
+
+**_Partagez_** votre zombie sur Twitter, bla bla, etc. (Insérer une image / liens)

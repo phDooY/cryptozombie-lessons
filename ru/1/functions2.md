@@ -1,60 +1,72 @@
 ---
-title: Private / Public Functions
-actions:
-  - checkAnswer
-  - hints
+title: Закрытые и открытые функции
+actions: ['Проверить', 'Подсказать']
 material:
   editor:
     language: sol
     startingCode: |
       pragma solidity ^0.4.19;
-      
+
       contract ZombieFactory {
-      
-      uint dnaDigits = 16;
-      uint dnaModulus = 10 ** dnaDigits;
-      
-      struct Zombie {
-      string name;
-      uint dna;
-      }
-      
-      Zombie[] public zombies;
-      
-      function createZombie(string _name, uint _dna) {
-      zombies.push(Zombie(_name, _dna));
-      }
-      
+
+          uint dnaDigits = 16;
+          uint dnaModulus = 10 ** dnaDigits;
+
+          struct Zombie {
+              string name;
+              uint dna;
+          }
+
+          Zombie[] public zombies;
+
+          function createZombie(string _name, uint _dna) {
+              zombies.push(Zombie(_name, _dna));
+          }
+
       }
     answer: >
       pragma solidity ^0.4.19;
-      
+
+
       contract ZombieFactory {
-      uint dnaDigits = 16; uint dnaModulus = 10 ** dnaDigits;
-      struct Zombie { string name; uint dna; }
-      Zombie[] public zombies;
-      function _createZombie(string _name, uint _dna) private { zombies.push(Zombie(_name, _dna)); }
+
+          uint dnaDigits = 16;
+          uint dnaModulus = 10 ** dnaDigits;
+
+          struct Zombie {
+              string name;
+              uint dna;
+          }
+
+          Zombie[] public zombies;
+
+          function _createZombie(string _name, uint _dna) private {
+              zombies.push(Zombie(_name, _dna));
+          }
+
       }
 ---
-In Solidity, functions are `public` by default. This means anyone (or any other contract) can call your contract's function and execute its code.
 
-Obviously this isn't always desireable, and can make your contract vulnerable to attacks. Thus it's good practice to mark your functions as `private` by default, and then only make `public` the functions you want to expose to the world.
+По умолчанию функции в Solidity `public` (открытые): любой человек или контракт может вызвать и исполнить функцию твоего контракта. 
 
-Let's look at how to declare a private function:
+Разумеется, это не всегда желательно, потому что в контракте могут найтись уязвимости для атак. Лучше по умолчанию помечать функции как «закрытые» и потом задавать «открытые» функции, которые не страшно выставить на всеобщее обозрение.
 
-    uint[] numbers;
-    
-    function _addToArray(uint _number) private {
-      numbers.push(_number);
-    }
-    
+Вот как задать закрытую функцию:
 
-This means only other functions within our contract will be able to call this function and add to the `numbers` array.
+```
+uint[] numbers;
 
-As you can see, we use the keyword `private` after the function name. And as with function parameters, it's convention to start private function names with an underscore (`_`).
+function _addToArray(uint _number) private {
+  numbers.push(_number);
+}
+```
 
-# Put it to the test
+Это означает, что только другие функции внутри контракта смогут вызвать и исполнить функцию добавления к массиву `numbers`. 
 
-Our contract's `createZombie` function is currently public by default — this means anyone could call it and create a new Zombie in our contract! Let's make it private.
+Как видишь, после имени функции идет ключевое слово `private`. Как и параметры, названия закрытых функций принято записывать, начиная со знака подчеркивания (`_`).
 
-1. Modify `createZombie` so it's a private function. Don't forget the naming convention!
+# Проверь себя
+
+На данный момент функция контракта `createZombie` (создать зомби) по умолчанию является открытой — любой может вызвать ее и создать зомби внутри нашего контакта! Давай закроем ее. 
+
+1. Измени тип функции `createZombie` на закрытый. Не забудь записать имя функции так, как принято!

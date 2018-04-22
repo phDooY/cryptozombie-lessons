@@ -1,20 +1,19 @@
 ---
-title: Data Types
-actions:
-  - checkAnswer
-  - hints
+title: データ型
+actions: ['答え合わせ', 'ヒント']
 material:
   editor:
     language: sol
-    0: |
-      
-    1: >
-      
+    startingCode: |
+    answer: >
 ---
-Solidity's code is encapsulated in contracts. A contract is basically...
 
-    contract HelloWorld
-    
-    
+Solidityのコードはコントラクト内にカプセル化されている。コントラクトは基本的には...
 
-# Put it to the test
+```
+contract HelloWorld
+
+```
+
+# それではテストだ
+

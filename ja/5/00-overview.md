@@ -1,12 +1,13 @@
 ---
-title: ERC721 & Crypto-Collectibles
-header: "Lesson 5: ERC721 & Crypto-Collectibles"
+title: ERC721とクリプト収集物
+header: "レッスン5: ERC721とクリプト収集物"
 roadmap: roadmap5.jpg
 ---
-Whew! Things are starting to heat up in here...
 
-In this lesson, we're going to get a bit more advanced.
+このチュートリアルもかなり熱くなってきたな・・・すごい！
 
-We're going to talk about **tokens**, the **ERC721** standard, and **crypto-collectible assets**.
+今回のレッスンは少し高度になるぞ。
 
-In other words, we're going to **make it so you can trade your zombies with your friends.**
+ これから **トークン**、 **ERC721** 規格、そして **収集可能なクリプト資産** について説明していく。
+
+つまり、このレッスンでは **お主のゾンビを友達とトレードできるようにする** からな！

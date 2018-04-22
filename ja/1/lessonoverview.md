@@ -1,8 +1,6 @@
 ---
-title: Lesson Overview
-actions:
-  - checkAnswer
-  - hints
+title: レッスンの概要
+actions: ['checkAnswer', 'hints']
 skipCheckAnswer: true
 material:
   saveZombie: false
@@ -11,31 +9,36 @@ material:
     ignoreZombieCache: true
     answer: 1
 ---
-In Lesson 1, you're going to build a "Zombie Factory" to build an army of zombies.
 
-* Our factory will maintain a database of all zombies in our army
-* Our factory will have a function for creating new zombies
-* Each zombie will have a random and unique appearance
+さて、レッスン１なので、まず「ゾンビファクトリー」でゾンビの兵士を作るところから始めるぞ。
 
-In later lessons, we'll add more functionality, like giving zombies the ability to attack humans or other zombies! But before we get there, we have to add the basic functionality of creating new zombies.
+* 作ったゾンビの兵士はファクトリーのデータベースで管理されるぞ
+* ファクトリーでは新しいゾンビを作れるぞ
+* 個々のゾンビは、ランダムにユニークな外見になるぞ
 
-## How Zombie DNA Works
 
-The zombie's appearance will be based on its "Zombie DNA". Zombie DNA is simple — it's a 16-digit integer, like:
+レッスンの後半で、さらに機能を追加して、人間や他のゾンビを攻撃できる能力を身につけることができるようになるからな！まあ、それは先の話になるから、とりあえずまずは標準的なゾンビを作成するぞ。
 
-    8356281049284737
-    
 
-Just like real DNA, different parts of this number will map to different traits. The first 2 digits map to the zombie's head type, the second 2 digits to the zombie's eyes, etc.
+## ゾンビのDNAの働き
 
-> Note: For this tutorial, we've kept things simple, and our zombies can have only 7 different types of heads (even though 2 digits allow 100 possible options). Later on we could add more head types if we wanted to increase the number of zombie variations.
+ゾンビの外見は「ゾンビDNA」によって決まるのだ。ゾンビDNAは簡単なもので、16桁の整数だ。例えば
 
-For example, the first 2 digits of our example DNA above are `83`. To map that to the zombie's head type, we do `83 % 7 + 1` = 7. So this Zombie would have the 7th zombie head type.
+```
+8356281049284737
+```
 
-In the panel to the right, go ahead and move the `head gene` slider to the 7th head (the Santa hat) to see what trait the `83` would correspond to.
+実際のDNAと同じように、それぞれの数字の部分は対応するゾンビの部分と一致するようにしてある。最初の2桁の数字はゾンビの頭の部分、次の2桁はゾンビの目の部分、という具合だ。
 
-# Put it to the test
+> 注: 2桁の数字では100種類の表示が可能ですが、このチュートリアルではシンプルにするためにゾンビの頭部を7種類に設定しています。さらにバリエーションを増やしたい場合は、後日増やすことが可能です。
 
-1. Play with the sliders on the right side of the page. Experiment to see how the different numerical values correspond to different aspects of the zombie's appearance.
+例えば、上で例にしたゾンビDNAの最初の2桁は「83」だ。これをゾンビの頭の種類に置き換える時に、`83 % 7 + 1 = 7`と計算する。したがってこのゾンビの頭部のタイプは7だ。
 
-Ok, enough playing around. When you're ready to continue, hit "Next Chapter" below, and let's dive into learning Solidity!
+右のパネルで`頭部の遺伝子`スライダーを７番目に合わせれば（サンタクロースの帽子）、`83`がここに対応していることを確認できるだろう。
+
+# テストの実施
+
+1. ページの右にある色々なスライダーを実際に動かしてみること。数字を変えることでゾンビの外観が変わることがわかるだろう。
+
+よし、準備運動はこれくらいで十分だろう。次に進む準備ができたら「次のチャプター」をクリックすれば、次のチャプターから実際にSolidityを教えていくから、覚悟しておけよ！
+

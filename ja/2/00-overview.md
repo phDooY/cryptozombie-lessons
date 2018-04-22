@@ -1,10 +1,12 @@
 ---
-title: Zombies Attack Their Victims
-header: So, you've made it to Lesson 2!
+title: ゾンビが人間を襲う
+header: レッスン 2までよくぞたどり着いた!
 roadmap: roadmap2.jpg
 ---
-Impressive, human! You're a better coder than I thought.
 
-Lesson 2 will teach you how to **multiply your zombie army by feeding on other lifeforms**.
+おお、人間よ！お前は私が思っていたよりもコードがよくできるようだな。
 
-In this lesson we will cover some more advanced Solidity concepts, so it's highly recommended that you complete Lesson 1 before starting.
+このレッスン 2では、**人間に噛み付いてゾンビ軍団を倍増させる方法を教えてやるが、怖がらずにしっかり学ぶのだ**。
+
+このレッスンで、ちょっと難し目のSolidityのコンセプトを説明していくから、レッスン 1を終了していないとさっぱりわからなくなるぞ。しっかりやっておくようにな。
+

@@ -1,82 +1,99 @@
 ---
-title: Keccak256 and Typecasting
-actions:
-  - checkAnswer
-  - hints
+title: Keccak256と型キャスト
+actions: ['答え合わせ', 'ヒント']
 material:
   editor:
     language: sol
     startingCode: |
       pragma solidity ^0.4.19;
-      
+
       contract ZombieFactory {
-      
-      uint dnaDigits = 16;
-      uint dnaModulus = 10 ** dnaDigits;
-      
-      struct Zombie {
-      string name;
-      uint dna;
-      }
-      
-      Zombie[] public zombies;
-      
-      function _createZombie(string _name, uint _dna) private {
-      zombies.push(Zombie(_name, _dna));
-      }
-      
-      function _generateRandomDna(string _str) private view returns (uint) {
-      // start here
-      }
-      
+
+          uint dnaDigits = 16;
+          uint dnaModulus = 10 ** dnaDigits;
+
+          struct Zombie {
+              string name;
+              uint dna;
+          }
+
+          Zombie[] public zombies;
+
+          function _createZombie(string _name, uint _dna) private {
+              zombies.push(Zombie(_name, _dna));
+          } 
+
+          function _generateRandomDna(string _str) private view returns (uint) {
+              // ここから始めるのだ
+          }
+
       }
     answer: >
       pragma solidity ^0.4.19;
-      
+
+
       contract ZombieFactory {
-      uint dnaDigits = 16; uint dnaModulus = 10 ** dnaDigits;
-      struct Zombie { string name; uint dna; }
-      Zombie[] public zombies;
-      function _createZombie(string _name, uint _dna) private { zombies.push(Zombie(_name, _dna)); }
-      function _generateRandomDna(string _str) private view returns (uint) { uint rand = uint(keccak256(_str)); return rand % dnaModulus; }
+
+          uint dnaDigits = 16;
+          uint dnaModulus = 10 ** dnaDigits;
+
+          struct Zombie {
+              string name;
+              uint dna;
+          }
+
+          Zombie[] public zombies;
+
+          function _createZombie(string _name, uint _dna) private {
+              zombies.push(Zombie(_name, _dna));
+          } 
+
+          function _generateRandomDna(string _str) private view returns (uint) {
+              uint rand = uint(keccak256(_str));
+              return rand % dnaModulus;
+          }
+
       }
 ---
-We want our `_generateRandomDna` function to return a (semi) random `uint`. How can we accomplish this?
 
-Ethereum has the hash function `keccak256` built in, which is a version of SHA3. A hash function basically maps an input string into a random 256-bit hexidecimal number. A slight change in the string will cause a large change in the hash.
+`_generateRandomDna`関数を（セミ）ランダムな`uint`で返したいのだが、何か良いアイディアがあるかな？
 
-It's useful for many purposes in Ethereum, but for right now we're just going to use it for pseudo-random number generation.
+イーサリアムにはSHA3のバージョンの一つである`keccak256`が組み込まれている。ハッシュ関数は基本的には、文字列をランダムな256ビットの16進数にマッピングする機能だ。文字列をほんの少しでも変更すれば、ハッシュは大きく変わるから気をつけるようにな。
 
-Example:
+イーサリアムのいろいろな場面で使用できるが、ここでは擬似乱数生成に使用していくぞ。
 
-    //6e91ec6b618bb462a4a6ee5aa2cb0e9cf30f7a052bb467b0ba58b8748c00d2e5
-    keccak256("aaaab");
-    //b1f078126895a1424524de5321b339ab00408010b7cf0e6ed451514981e58aa9
-    keccak256("aaaac");
-    
+例：
 
-As you can see, the returned values are totally different despite only a 1 character change in the input.
+```
+//6e91ec6b618bb462a4a6ee5aa2cb0e9cf30f7a052bb467b0ba58b8748c00d2e5
+keccak256("aaaab");
+//b1f078126895a1424524de5321b339ab00408010b7cf0e6ed451514981e58aa9
+keccak256("aaaac");
+```
 
-> Note: **Secure** random-number generation in blockchain is a very difficult problem. Our method here is insecure, but since security isn't top priority for our Zombie DNA, it will be good enough for our purposes.
+見てわかると思うが、入力する文字が１文字違うだけで、戻り値が全く別物になることがわかったかな。
 
-## Typecasting
+> 注：ブロックチェーンでの**安全な** 乱数の生成は非常に難しい課題です。ここで紹介する方法は安全なものではありませんが、ゾンビDNAの作成のチュートリアルではセキュリティを考慮する必要はないので、この方法で十分です。
 
-Sometimes you need to convert between data types. Take the following example:
+## 型キャスト
 
-    uint8 a = 5;
-    uint b = 6;
-    // throws an error because a * b returns a uint, not uint8:
-    uint8 c = a * b; 
-    // we have to typecast b as a uint8 to make it work:
-    uint8 c = a * uint8(b); 
-    
+場合によっては、データ型を変更する必要があるときがある。下の例で考えてみるぞ：
 
-In the above, `a * b` returns a `uint`, but we were trying to store it as a `uint8`, which could cause potential problems. By casting it as a `uint8`, it works and the compiler won't throw an error.
+```
+uint8 a = 5;
+uint b = 6;
+// a * b はuint8ではなくuintで返すから、エラーになる：
+uint8 c = a * b; 
+// 正しく動作させるために、bをuint8に型キャストさせる：
+uint8 c = a * uint8(b); 
+```
 
-# Put it to the test
+この例では`a * b`は`uint`を返すが、`uint8`で格納しようとしているから、問題が発生することになる。`uint8`にキャストすることで、正常に動作する上にコンパイラもエラーを吐き出すことがなくなる。
 
-Let's fill in the body of our `_generateRandomDna` function! Here's what it should do:
+# それではテストだ
 
-1. The first line of code should take the `keccak256` hash of `_str` to generate a pseudo-random hexidecimal, typecast it as a `uint`, and finally store the result in a `uint` called `rand`.
+`_generateRandomDna`関数の中身を書いてみよ！以下の点に従って書くように：
 
-2. We want our DNA to only be 16 digits long (remember our `dnaModulus`?). So the second line of code should `return` the above value modulus (`%`) `dnaModulus`.
+1. コードの最初の行は `_str`の`keccak256`ハッシュを取得し、擬似乱数の16進数を生成し、それを`uint`に型キャストして、 `rand`という`uint`に格納せよ。
+
+2. DNAは16桁になるようにしたい（`dnaModulus`を覚えているか？）。そこで次の行では上で求めた値の`dnaModulus`による剰余(`%`)を `return`するようにせよ。

@@ -1,60 +1,80 @@
 ---
-title: Putting It Together
-actions:
-  - checkAnswer
-  - hints
+title: 統合
+actions: ['答え合わせ', 'ヒント']
 material:
   editor:
     language: sol
     startingCode: |
       pragma solidity ^0.4.19;
-      
+
       contract ZombieFactory {
-      
-      uint dnaDigits = 16;
-      uint dnaModulus = 10 ** dnaDigits;
-      
-      struct Zombie {
-      string name;
-      uint dna;
-      }
-      
-      Zombie[] public zombies;
-      
-      function _createZombie(string _name, uint _dna) private {
-      zombies.push(Zombie(_name, _dna));
-      }
-      
-      function _generateRandomDna(string _str) private view returns (uint) {
-      uint rand = uint(keccak256(_str));
-      return rand % dnaModulus;
-      }
-      
-      // start here
-      
+
+          uint dnaDigits = 16;
+          uint dnaModulus = 10 ** dnaDigits;
+
+          struct Zombie {
+              string name;
+              uint dna;
+          }
+
+          Zombie[] public zombies;
+
+          function _createZombie(string _name, uint _dna) private {
+              zombies.push(Zombie(_name, _dna));
+          } 
+
+          function _generateRandomDna(string _str) private view returns (uint) {
+              uint rand = uint(keccak256(_str));
+              return rand % dnaModulus;
+          }
+
+          // ここから始めるのだ
+
       }
     answer: >
       pragma solidity ^0.4.19;
-      
+
+
       contract ZombieFactory {
-      uint dnaDigits = 16; uint dnaModulus = 10 ** dnaDigits;
-      struct Zombie { string name; uint dna; }
-      Zombie[] public zombies;
-      function _createZombie(string _name, uint _dna) private { zombies.push(Zombie(_name, _dna)); }
-      function _generateRandomDna(string _str) private view returns (uint) { uint rand = uint(keccak256(_str)); return rand % dnaModulus; }
-      function createRandomZombie(string _name) public { uint randDna = _generateRandomDna(_name); _createZombie(_name, randDna); }
+
+          uint dnaDigits = 16;
+          uint dnaModulus = 10 ** dnaDigits;
+
+          struct Zombie {
+              string name;
+              uint dna;
+          }
+
+          Zombie[] public zombies;
+
+          function _createZombie(string _name, uint _dna) private {
+              zombies.push(Zombie(_name, _dna));
+          } 
+
+          function _generateRandomDna(string _str) private view returns (uint) {
+              uint rand = uint(keccak256(_str));
+              return rand % dnaModulus;
+          }
+
+          function createRandomZombie(string _name) public {
+              uint randDna = _generateRandomDna(_name);
+              _createZombie(_name, randDna);
+          }
+
       }
 ---
-We're close to being done with our random Zombie generator! Let's create a public function that ties everything together.
 
-We're going to create a public function that takes an input, the zombie's name, and uses the name to create a zombie with random DNA.
+ここまできたらゾンビ生成システムの完成まであと少しだ！全てを結合するpublic関数を作成しよう。
 
-# Put it to the test
+ゾンビの名前やユーザーの名前をインプットできて、ランダムなDNAでゾンビを作れるpublic関数を作成することにしよう。
 
-1. Create a `public` function named `createRandomZombie`. It will take one parameter named `_name` (a `string`). *(Note: Declare this function `public` just as you declared previous functions `private`)*
 
-2. The first line of the function should run the `_generateRandomDna` function on `_name`, and store it in a `uint` named `randDna`.
+# それではテストだ
 
-3. The second line should run the `_createZombie` function and pass it `_name` and `randDna`.
+1. `createRandomZombie`という名前の `public` 関数を作成せよ。そこに`_name` (`string`)というパラメーターを設定せよ。 _(注: `public` 関数を宣言する方法は、 `private`関数を宣言したのと同じです)_
 
-4. The solution should be 4 lines of code (including the closing `}` of the function).
+2. 関数の最初の行で`_name`で`_generateRandomDna`を実行させ、それを`randDna`という名前で `uint`に格納せよ。
+
+3. 次の行で、 `_createZombie` 関数を実行し、その値を`_name`と`randDna`に渡せ。
+
+4. ソリューションは4行以内とする（関数を閉じる`}`を含む）。
