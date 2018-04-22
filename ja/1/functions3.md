@@ -1,104 +1,86 @@
 ---
-title: さらに関数を続けるぞ
-actions: ['答え合わせ', 'ヒント']
+title: More on Functions
+actions:
+  - checkAnswer
+  - hints
 material:
   editor:
     language: sol
     startingCode: |
       pragma solidity ^0.4.19;
-
+      
       contract ZombieFactory {
-
-          uint dnaDigits = 16;
-          uint dnaModulus = 10 ** dnaDigits;
-
-          struct Zombie {
-              string name;
-              uint dna;
-          }
-
-          Zombie[] public zombies;
-
-          function _createZombie(string _name, uint _dna) private {
-              zombies.push(Zombie(_name, _dna));
-          }
-
-          // start here
-
+      
+      uint dnaDigits = 16;
+      uint dnaModulus = 10 ** dnaDigits;
+      
+      struct Zombie {
+      string name;
+      uint dna;
+      }
+      
+      Zombie[] public zombies;
+      
+      function _createZombie(string _name, uint _dna) private {
+      zombies.push(Zombie(_name, _dna));
+      }
+      
+      // start here
+      
       }
     answer: >
       pragma solidity ^0.4.19;
-
-
+      
       contract ZombieFactory {
-
-          uint dnaDigits = 16;
-          uint dnaModulus = 10 ** dnaDigits;
-
-          struct Zombie {
-              string name;
-              uint dna;
-          }
-
-          Zombie[] public zombies;
-
-          function _createZombie(string _name, uint _dna) private {
-              zombies.push(Zombie(_name, _dna));
-          } 
-
-          function _generateRandomDna(string _str) private view returns (uint) {
-
-          }
-
+      uint dnaDigits = 16; uint dnaModulus = 10 ** dnaDigits;
+      struct Zombie { string name; uint dna; }
+      Zombie[] public zombies;
+      function _createZombie(string _name, uint _dna) private { zombies.push(Zombie(_name, _dna)); }
+      function _generateRandomDna(string _str) private view returns (uint) {
+      }
       }
 ---
+In this chapter, we're going to learn about Function ***return values***, and function modifiers.
 
-このチャプターでは、関数の **_戻り値_**と、修飾子について教えるぞ。
+## Return Values
 
-## 戻り値
+To return a value from a function, the declaration looks like this:
 
-関数から値を返すときは、次のように宣言するのだ：
+    string greeting = "What's up dog";
+    
+    function sayHello() public returns (string) {
+      return greeting;
+    }
+    
 
-```
-string greeting = "What's up dog";
+In Solidity, the function declaration contains the type of the return value (in this case `string`).
 
-function sayHello() public returns (string) {
-  return greeting;
-}
-```
+## Function modifiers
 
-Solidityでは関数の宣言に戻り値の型を含むから覚えておくように（ここでは `string`だ）。
+The above function doesn't actually change state in Solidity — e.g. it doesn't change any values or write anything.
 
-## 関数の修飾子
+So in this case we could declare it as a ***view*** function, meaning it's only viewing the data but not modifying it:
 
-上の関数はSolidity上では何も変更されないぞ。例えば値を変更したり、何かを書き込むこともない。
+    function sayHello() public view returns (string) {
+    
 
-このケースでは**_view_**関数を宣言できる。これはつまりデータの読み取り専用で編集できないということだ：
+Solidity also contains ***pure*** functions, which means you're not even accessing any data in the app. Consider the following:
 
-```
-function sayHello() public view returns (string) {
-```
+    function _multiply(uint a, uint b) private pure returns (uint) {
+      return a * b;
+    }
+    
 
-Solidityには**_pure_**関数がある。これを使うとアプリ内のデータにすらアクセスできない。次のコードを考えてみよう：
+This function doesn't even read from the state of the app — its return value depends only on its function parameters. So in this case we would declare the function as ***pure***.
 
-```
-function _multiply(uint a, uint b) private pure returns (uint) {
-  return a * b;
-}
-```
+> Note: It may be hard to remember when to mark functions as pure/view. Luckily the Solidity compiler is good about issuing warnings to let you know when you should use one of these modifiers.
 
-この関数はアプリから読み込むことすらできない。つまり戻り値が関数のパラメーターのみに依存することになる。この場合**_pure_**関数として宣言することができる。
+# Put it to the test
 
+We're going to want a helper function that generates a random DNA number from a string.
 
-> 注：pure/viewとだけ関数に書くと覚えにくくなります。幸い、Solidityのコンパイラは優秀なので、どちらの修飾子を使うべきか警告してくれます。
+1. Create a `private` function called `_generateRandomDna`. It will take one parameter named `_str` (a `string`), and return a `uint`.
 
+2. This function will view some of our contract's variables but not modify them, so mark it as `view`.
 
-# それではテストだ
-
-文字列からランダムなDNA番号を生成するヘルパー関数を作りたい。
-
-1. `_generateRandomDna`という名前の`private`関数を作成せよ。パラメーターは `_str`(`string`)という名前で、戻り値を`uint`に設定せよ。
-
-2. この関数はコントラクトの変数を読み込むことはあるが、編集することはない。そこで修飾子を`view`と設定せよ。
-
-3. 関数の中身は空にせよ。中身は後で書き込むぞ。
+3. The function body should be empty at this point — we'll fill it in later.
