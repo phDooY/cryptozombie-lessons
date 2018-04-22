@@ -1,6 +1,8 @@
 ---
-title: まとめ
-actions: ['答え合わせ', 'ヒント']
+title: Wrapping It Up
+actions:
+  - checkAnswer
+  - hints
 requireLogin: true
 material:
   saveZombie: false
@@ -10,26 +12,21 @@ material:
     hideSliders: true
     answer: 1
 ---
+Congratulations! That concludes Lesson 3.
 
-よくぞここまでたどり着いた！これでレッスン 3は終わりだ。
+## Let's recap:
 
-## これまでやったことをまとめるぞ。
+- We've added a way to update our CryptoKitties contracts
+- We've learned to protect core functions with `onlyOwner`
+- We've learned about gas and gas optimization
+- We added levels and cooldowns to our zombies
+- We now have functions to update a zombie's name and DNA once the zombie gets above a certain level
+- And finally, we now have a function to return a user's zombie army
 
-- クリプトキティーズのコントラクトを更新する方法を追加した
-- `onlyOwner`でコアの機能を保護する方法を学んだ
-- ガスとガスの最適化について学んだ
-- ゾンビのレベルとクールダウンを追加した
-- ゾンビのレベルが上がると、ゾンビの名前やDNAを変更できる機能を追加した
-- ユーザーのゾンビ軍団が返る関数を追加した
+## Claim your reward
 
-## ご褒美の時間だ
+As a reward for completing Lesson 3, both of your zombies have leveled up!
 
-レッスン3を終了した褒美として、お主のゾンビを２体ともレベルアップしてやろう！
+And now that NoName (the kitty-zombie you created in Lesson 2), is upgraded to level 2, you can call `changeName` to give him/her a name. NoName no more!
 
-NoName(レッスン2 で作った猫ゾンビ)がレベル2になったので、`changeName`を呼び出して名前をつけることができるぞ。よい名前をつけてやれ！
-
-さあ、NoNameに名前を与え、次のチャプターに進んでこのレッスンを終了せよ。
-
-
-
-
+Go ahead and give NoName a name, then proceed to the next chapter to complete the lesson.
