@@ -1,6 +1,8 @@
 ---
-title: Ownable コントラクト
-actions: ['答え合わせ', 'ヒント']
+title: Ownable Contracts
+actions:
+  - checkAnswer
+  - hints
 requireLogin: true
 material:
   editor:
@@ -8,250 +10,220 @@ material:
     startingCode:
       "zombiefactory.sol": |
         pragma solidity ^0.4.19;
-
-        // 1. ここにインポートせよ
-
-        // 2. ここで継承せよ:
+        
+        // 1. Import here
+        
+        // 2. Inherit here:
         contract ZombieFactory {
-
-            event NewZombie(uint zombieId, string name, uint dna);
-
-            uint dnaDigits = 16;
-            uint dnaModulus = 10 ** dnaDigits;
-
-            struct Zombie {
-                string name;
-                uint dna;
-            }
-
-            Zombie[] public zombies;
-
-            mapping (uint => address) public zombieToOwner;
-            mapping (address => uint) ownerZombieCount;
-
-            function _createZombie(string _name, uint _dna) internal {
-                uint id = zombies.push(Zombie(_name, _dna)) - 1;
-                zombieToOwner[id] = msg.sender;
-                ownerZombieCount[msg.sender]++;
-                NewZombie(id, _name, _dna);
-            }
-
-            function _generateRandomDna(string _str) private view returns (uint) {
-                uint rand = uint(keccak256(_str));
-                return rand % dnaModulus;
-            }
-
-            function createRandomZombie(string _name) public {
-                require(ownerZombieCount[msg.sender] == 0);
-                uint randDna = _generateRandomDna(_name);
-                randDna = randDna - randDna % 100;
-                _createZombie(_name, randDna);
-            }
-
+        
+        event NewZombie(uint zombieId, string name, uint dna);
+        
+        uint dnaDigits = 16;
+        uint dnaModulus = 10 ** dnaDigits;
+        
+        struct Zombie {
+        string name;
+        uint dna;
+        }
+        
+        Zombie[] public zombies;
+        
+        mapping (uint => address) public zombieToOwner;
+        mapping (address => uint) ownerZombieCount;
+        
+        function _createZombie(string _name, uint _dna) internal {
+        uint id = zombies.push(Zombie(_name, _dna)) - 1;
+        zombieToOwner[id] = msg.sender;
+        ownerZombieCount[msg.sender]++;
+        NewZombie(id, _name, _dna);
+        }
+        
+        function _generateRandomDna(string _str) private view returns (uint) {
+        uint rand = uint(keccak256(_str));
+        return rand % dnaModulus;
+        }
+        
+        function createRandomZombie(string _name) public {
+        require(ownerZombieCount[msg.sender] == 0);
+        uint randDna = _generateRandomDna(_name);
+        randDna = randDna - randDna % 100;
+        _createZombie(_name, randDna);
+        }
+        
         }
       "zombiefeeding.sol": |
         pragma solidity ^0.4.19;
-
+        
         import "./zombiefactory.sol";
-
+        
         contract KittyInterface {
-          function getKitty(uint256 _id) external view returns (
-            bool isGestating,
-            bool isReady,
-            uint256 cooldownIndex,
-            uint256 nextActionAt,
-            uint256 siringWithId,
-            uint256 birthTime,
-            uint256 matronId,
-            uint256 sireId,
-            uint256 generation,
-            uint256 genes
-          );
+        function getKitty(uint256 _id) external view returns (
+        bool isGestating,
+        bool isReady,
+        uint256 cooldownIndex,
+        uint256 nextActionAt,
+        uint256 siringWithId,
+        uint256 birthTime,
+        uint256 matronId,
+        uint256 sireId,
+        uint256 generation,
+        uint256 genes
+        );
         }
-
+        
         contract ZombieFeeding is ZombieFactory {
-
-          KittyInterface kittyContract;
-
-          function setKittyContractAddress(address _address) external {
-            kittyContract = KittyInterface(_address);
-          }
-
-          function feedAndMultiply(uint _zombieId, uint _targetDna, string _species) public {
-            require(msg.sender == zombieToOwner[_zombieId]);
-            Zombie storage myZombie = zombies[_zombieId];
-            _targetDna = _targetDna % dnaModulus;
-            uint newDna = (myZombie.dna + _targetDna) / 2;
-            if (keccak256(_species) == keccak256("kitty")) {
-              newDna = newDna - newDna % 100 + 99;
-            }
-            _createZombie("NoName", newDna);
-          }
-
-          function feedOnKitty(uint _zombieId, uint _kittyId) public {
-            uint kittyDna;
-            (,,,,,,,,,kittyDna) = kittyContract.getKitty(_kittyId);
-            feedAndMultiply(_zombieId, kittyDna, "kitty");
-          }
-
+        
+        KittyInterface kittyContract;
+        
+        function setKittyContractAddress(address _address) external {
+        kittyContract = KittyInterface(_address);
+        }
+        
+        function feedAndMultiply(uint _zombieId, uint _targetDna, string _species) public {
+        require(msg.sender == zombieToOwner[_zombieId]);
+        Zombie storage myZombie = zombies[_zombieId];
+        _targetDna = _targetDna % dnaModulus;
+        uint newDna = (myZombie.dna + _targetDna) / 2;
+        if (keccak256(_species) == keccak256("kitty")) {
+        newDna = newDna - newDna % 100 + 99;
+        }
+        _createZombie("NoName", newDna);
+        }
+        
+        function feedOnKitty(uint _zombieId, uint _kittyId) public {
+        uint kittyDna;
+        (,,,,,,,,,kittyDna) = kittyContract.getKitty(_kittyId);
+        feedAndMultiply(_zombieId, kittyDna, "kitty");
+        }
+        
         }
       "ownable.sol": |
         /**
-         * @title Ownable
-         * @dev The Ownable contract has an owner address, and provides basic authorization control
-         * functions, this simplifies the implementation of "user permissions".
-         */
+        * @title Ownable
+        * @dev The Ownable contract has an owner address, and provides basic authorization control
+        * functions, this simplifies the implementation of "user permissions".
+        */
         contract Ownable {
-          address public owner;
-
-          event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
-
-          /**
-           * @dev The Ownable constructor sets the original `owner` of the contract to the sender
-           * account.
-           */
-          function Ownable() public {
-            owner = msg.sender;
-          }
-
-
-          /**
-           * @dev Throws if called by any account other than the owner.
-           */
-          modifier onlyOwner() {
-            require(msg.sender == owner);
-            _;
-          }
-
-
-          /**
-           * @dev Allows the current owner to transfer control of the contract to a newOwner.
-           * @param newOwner The address to transfer ownership to.
-           */
-          function transferOwnership(address newOwner) public onlyOwner {
-            require(newOwner != address(0));
-            OwnershipTransferred(owner, newOwner);
-            owner = newOwner;
-          }
-
+        address public owner;
+        
+        event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
+        
+        /**
+        * @dev The Ownable constructor sets the original `owner` of the contract to the sender
+        * account.
+        */
+        function Ownable() public {
+        owner = msg.sender;
+        }
+        
+        
+        /**
+        * @dev Throws if called by any account other than the owner.
+        */
+        modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+        }
+        
+        
+        /**
+        * @dev Allows the current owner to transfer control of the contract to a newOwner.
+        * @param newOwner The address to transfer ownership to.
+        */
+        function transferOwnership(address newOwner) public onlyOwner {
+        require(newOwner != address(0));
+        OwnershipTransferred(owner, newOwner);
+        owner = newOwner;
+        }
+        
         }
     answer: >
       pragma solidity ^0.4.19;
-
       import "./ownable.sol";
-
       contract ZombieFactory is Ownable {
-
-          event NewZombie(uint zombieId, string name, uint dna);
-
-          uint dnaDigits = 16;
-          uint dnaModulus = 10 ** dnaDigits;
-
-          struct Zombie {
-              string name;
-              uint dna;
-          }
-
-          Zombie[] public zombies;
-
-          mapping (uint => address) public zombieToOwner;
-          mapping (address => uint) ownerZombieCount;
-
-          function _createZombie(string _name, uint _dna) internal {
-              uint id = zombies.push(Zombie(_name, _dna)) - 1;
-              zombieToOwner[id] = msg.sender;
-              ownerZombieCount[msg.sender]++;
-              NewZombie(id, _name, _dna);
-          }
-
-          function _generateRandomDna(string _str) private view returns (uint) {
-              uint rand = uint(keccak256(_str));
-              return rand % dnaModulus;
-          }
-
-          function createRandomZombie(string _name) public {
-              require(ownerZombieCount[msg.sender] == 0);
-              uint randDna = _generateRandomDna(_name);
-              randDna = randDna - randDna % 100;
-              _createZombie(_name, randDna);
-          }
-
+      event NewZombie(uint zombieId, string name, uint dna);
+      uint dnaDigits = 16; uint dnaModulus = 10 ** dnaDigits;
+      struct Zombie { string name; uint dna; }
+      Zombie[] public zombies;
+      mapping (uint => address) public zombieToOwner; mapping (address => uint) ownerZombieCount;
+      function _createZombie(string _name, uint _dna) internal { uint id = zombies.push(Zombie(_name, _dna)) - 1; zombieToOwner[id] = msg.sender; ownerZombieCount[msg.sender]++; NewZombie(id, _name, _dna); }
+      function _generateRandomDna(string _str) private view returns (uint) { uint rand = uint(keccak256(_str)); return rand % dnaModulus; }
+      function createRandomZombie(string _name) public { require(ownerZombieCount[msg.sender] == 0); uint randDna = _generateRandomDna(_name); randDna = randDna - randDna % 100; _createZombie(_name, randDna); }
       }
 ---
+Did you spot the security hole in the previous chapter?
 
-どれ、前のチャプターでセキュリティホールに気がついたか？
+`setKittyContractAddress` is `external`, so anyone can call it! That means anyone who called the function could change the address of the CryptoKitties contract, and break our app for all its users.
 
-`setKittyContractAddress` は `external`だから、だれでも呼び出すことができるのだ！つまり、この関数を呼び出した奴はクリプトキティーズのコントラクトのアドレスを変更しすることで、我々のアプリをめちゃくちゃにすることが可能なのだ。
+We do want the ability to update this address in our contract, but we don't want everyone to be able to update it.
 
-もちろん、アドレスの更新ができるようにするつもりだが、誰でも更新できるようにしたいわけでない。
+To handle cases like this, one common practice that has emerged is to make contracts `Ownable` — meaning they have an owner (you) who has special privileges.
 
-ではどうすれば良いかというと、よくあるやり方としては、コントラクトを`Ownable`（所有可能）とすることだ。これはコントラクトには特別な権限を持つオーナー（所有者）がいることを意味するものだ。
+## OpenZeppelin's `Ownable` contract
 
-## OpenZeppelinの `Ownable` コントラクト
+Below is the `Ownable` contract taken from the ***OpenZeppelin*** Solidity library. OpenZeppelin is a library of secure and community-vetted smart contracts that you can use in your own DApps. After this lesson, we highly recommend you check out their site to further your learning!
 
-一つ例を見せてやろう。これはSolidityのライブラリにある **_OpenZeppelin_** という`Ownable`コントラクトだ。OpenZeppelinは安全でしかもコミュニティで検証を経たスマートコントラクトだ。これをDAppで使うことができる。このレッスンの後で、OpenZeppelinのサイトをチェックしておくように。今後非常に役に立つだろう！
+Give the contract below a read-through. You're going to see a few things we haven't learned yet, but don't worry, we'll talk about them afterward.
 
-下のコントラクトをよく読むように。まだわからないことがいくつもあるが、あとで教えるから今は気にすることはない。
+    /**
+     * @title Ownable
+     * @dev The Ownable contract has an owner address, and provides basic authorization control
+     * functions, this simplifies the implementation of "user permissions".
+     */
+    contract Ownable {
+      address public owner;
+      event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
+    
+      /**
+       * @dev The Ownable constructor sets the original `owner` of the contract to the sender
+       * account.
+       */
+      function Ownable() public {
+        owner = msg.sender;
+      }
+    
+      /**
+       * @dev Throws if called by any account other than the owner.
+       */
+      modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+      }
+    
+      /**
+       * @dev Allows the current owner to transfer control of the contract to a newOwner.
+       * @param newOwner The address to transfer ownership to.
+       */
+      function transferOwnership(address newOwner) public onlyOwner {
+        require(newOwner != address(0));
+        OwnershipTransferred(owner, newOwner);
+        owner = newOwner;
+      }
+    }
+    
 
-```
-/**
- * @title Ownable
- * @dev The Ownable contract has an owner address, and provides basic authorization control
- * functions, this simplifies the implementation of "user permissions".
- */
-contract Ownable {
-  address public owner;
-  event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
+A few new things here we haven't seen before:
 
-  /**
-   * @dev The Ownable constructor sets the original `owner` of the contract to the sender
-   * account.
-   */
-  function Ownable() public {
-    owner = msg.sender;
-  }
+- Constructors: `function Ownable()` is a ***constructor***, which is an optional special function that has the same name as the contract. It will get executed only one time, when the contract is first created.
+- Function Modifiers: `modifier onlyOwner()`. Modifiers are kind of half-functions that are used to modify other functions, usually to check some requirements prior to execution. In this case, `onlyOwner` can be used to limit access so **only** the **owner** of the contract can run this function. We'll talk more about function modifiers in the next chapter, and what that weird `_;` does.
+- `indexed` keyword: don't worry about this one, we don't need it yet.
 
-  /**
-   * @dev Throws if called by any account other than the owner.
-   */
-  modifier onlyOwner() {
-    require(msg.sender == owner);
-    _;
-  }
+So the `Ownable` contract basically does the following:
 
-  /**
-   * @dev Allows the current owner to transfer control of the contract to a newOwner.
-   * @param newOwner The address to transfer ownership to.
-   */
-  function transferOwnership(address newOwner) public onlyOwner {
-    require(newOwner != address(0));
-    OwnershipTransferred(owner, newOwner);
-    owner = newOwner;
-  }
-}
-```
+1. When a contract is created, its constructor sets the `owner` to `msg.sender` (the person who deployed it)
 
-新しいものがいくつかあるから、解説してやるぞ：
+2. It adds an `onlyOwner` modifier, which can restrict access to certain functions to only the `owner`
 
-- コンストラクタ： `function Ownable()`は**_コンストラクタ_**だ。これは特別な関数で、コントラクトと同じ名前だ。コントラクトが最初に作成された時に、1度だけ実行されるぞ。
-- 関数修飾子：修飾子は半分関数のようなもので、他の関数を編集する際に使うものだ。通常は実行する前に要件をチェックするために使用するぞ。この例で言えば、`onlyOwner`は**owner(オーナー）だけ**が関数を実行できるように、制限をアクセスするために使用されているのだ。関数修飾子については次のチャプターで詳しく説明してやろう。`_;` という奇妙なものについてもな。
-- `indexed` キーワード：これは無視して良い。必要ない。
+3. It allows you to transfer the contract to a new `owner`
 
-`Ownable`コントラクトは基本的には次のようになる。これを覚えておくようにな：
+`onlyOwner` is such a common requirement for contracts that most Solidity DApps start with a copy/paste of this `Ownable` contract, and then their first contract inherits from it.
 
-1. コントラクトが作られた時、コンストラクタが`owner` を `msg.sender` （実行した人物だ）に設定する。
+Since we want to limit `setKittyContractAddress` to `onlyOwner`, we're going to do the same for our contract.
 
-2. `onlyOwner`修飾子を追加して、`owner`だけが特定の関数にアクセスできるように設定する。
+## Put it to the test
 
-3. 新しい`owner`にコントラクトを譲渡することも可能だ
+We've gone ahead and copied the code of the `Ownable` contract into a new file, `ownable.sol`. Let's go ahead and make `ZombieFactory` inherit from it.
 
-`onlyOwner`は誰もが皆必要としているものだから非常に一般的になった。だからSolidityのDAppを開発するときには、皆がこの`Ownable`コントラクトをコピーペーストしてから、最初のコントラクトの継承を始めているのだ。
-我々も`setKittyContractAddress` を`onlyOwner`に制限したいから、同じ様にするのだぞ。
+1. Modify our code to `import` the contents of `ownable.sol`. If you don't remember how to do this take a look at `zombiefeeding.sol`.
 
-## それではテストだ
-
-新しいファイルの `ownable.sol`にすでに`Ownable`のコードをコピーしてある。そこで`ZombieFactory` を継承させることにする。
-
-1. `ownable.sol`を`import`するように我々のコードを変更せよ。なに、やり方を忘れてしまっただと？その場合は`zombiefeeding.sol`を見て思い出すのだ。
-
-2. `ZombieFactory`コントラクトを編集して`Ownable`を継承させよ。やり方を忘れていたら`zombiefeeding.sol` を見て思い出すように。
+2. Modify the `ZombieFactory` contract to inherit from `Ownable`. Again, you can take a look at `zombiefeeding.sol` if you don't remember how this is done.
