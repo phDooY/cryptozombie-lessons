@@ -1,73 +1,60 @@
 ---
-title: 関数の宣言
-actions: ['答え合わせ', 'ヒント']
+title: Function Declarations
+actions:
+  - checkAnswer
+  - hints
 material:
   editor:
     language: sol
     startingCode: |
       pragma solidity ^0.4.19;
-
+      
       contract ZombieFactory {
-
-          uint dnaDigits = 16;
-          uint dnaModulus = 10 ** dnaDigits;
-
-          struct Zombie {
-              uint dna;
-              string name;
-          }
-
-          Zombie[] public zombies;
-
-          // ここから始めるのだ
-
+      
+      uint dnaDigits = 16;
+      uint dnaModulus = 10 ** dnaDigits;
+      
+      struct Zombie {
+      uint dna;
+      string name;
+      }
+      
+      Zombie[] public zombies;
+      
+      // start here
+      
       }
     answer: >
       pragma solidity ^0.4.19;
-
-
+      
       contract ZombieFactory {
-
-          uint dnaDigits = 16;
-          uint dnaModulus = 10 ** dnaDigits;
-
-          struct Zombie {
-              uint dna;
-              string name;
-          }
-
-          Zombie[] public zombies;
-
-          function createZombie(string _name, uint _dna) {
-
-          }
-
+      uint dnaDigits = 16; uint dnaModulus = 10 ** dnaDigits;
+      struct Zombie { uint dna; string name; }
+      Zombie[] public zombies;
+      function createZombie(string _name, uint _dna) {
+      }
       }
 ---
+A function declaration in solidity looks like the following:
 
-関数の宣言はsolidityでは次のようになる： 
+    function eatHamburgers(string _name, uint _amount) {
+    
+    }
+    
 
-```
-function eatHamburgers(string _name, uint _amount) {
+This is a function named `eatHamburgers` that takes 2 parameters: a `string` and a `uint`. For now the body of the function is empty.
 
-}
-```
+> Note: It's convention (but not required) to start function parameter variable names with an underscore (`_`) in order to differentiate them from global variables. We'll use that convention throughout our tutorial.
 
-これは`string` と `uint`という2つのパラメーターを持つ、`eatHamburgers`というファンクションだ。関数の中身は今は空にしてある。
+You would call this function like so:
 
-> 注：グローバル変数と区別をつけるために、関数パラメーター変数名はアンダースコア(`_`)をつけるのが通例（必須ではありません）です。このチュートリアルでは通例に従います。
+    eatHamburgers("vitalik", 100);
+    
 
-この関数は次のように呼び出すことが可能だ：
+# Put it to the test
 
-```
-eatHamburgers("vitalik", 100);
-```
+In our app, we're going to need to be able to create some zombies. Let's create a function for that.
 
-# それじゃあテストするぞ
+1. Create a function named `createZombie`. It should take two parameters: **__name_** (a `string`), and **__dna_** (a `uint`).
 
-アプリでゾンビを何体も作る必要がある。関数を使ってこれを実現したい。
-
-1. `createZombie`という名前の関数を作成せよ。関数には、**__name_** (`string`)と、**__dna_** (`uint`)の、2つのパラメーターを設定せよ。
-
-関数の中身は空で構わない - 後で中身を書いていくからな。
-
+Leave the body empty for now — we'll fill it in later.
